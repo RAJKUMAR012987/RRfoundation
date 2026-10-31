@@ -24,6 +24,6 @@ const config = `export const environment = {
 };
 `;
 
-fs.writeFileSync('src/environments/prod.ts', config);
+fs.writeFileSync('src/environments/environment.prod.ts', config);
 
 console.log('Production environment configured successfully!');
