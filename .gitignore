@@ -11,3 +11,6 @@ dist/
 
 # IDE files
 .vscode/
+
+# Generated production environment
+src/environments/prod.ts
