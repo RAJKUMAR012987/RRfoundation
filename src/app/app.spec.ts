@@ -18,17 +18,18 @@ describe('App', () => {
     await fixture.whenStable();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelectorAll('nav a')).toHaveLength(5);
+    expect(compiled.querySelectorAll('#main-navigation a')).toHaveLength(5);
     expect(compiled.querySelector('.site-header .header-brand .brand-logo')).not.toBeNull();
     const utilityBar = compiled.querySelector<HTMLElement>('.utility-bar');
     expect(utilityBar?.textContent).toContain('hello@example.org');
     expect(utilityBar?.textContent).toContain('+91 00000 00000');
-    expect(utilityBar?.textContent).toContain('REG-ABCD-1234');
-    expect(utilityBar?.textContent).toContain('PAN-ABCD-1234');
+    expect(compiled.querySelector('.header-pan')?.textContent).toContain('PAN-ABCD-1234');
+    expect(compiled.querySelector('.header-reg-number')?.textContent).toContain('REG-ABCD-1234');
+    expect(compiled.querySelector('.sf-col--brand .sf-reg-details')).toBeNull();
     expect(utilityBar?.querySelector('a[href*="facebook.com"]')).not.toBeNull();
     expect(utilityBar?.querySelector('a[href*="instagram.com"]')).not.toBeNull();
     expect(utilityBar?.textContent).toContain('Volunteer');
-    expect(utilityBar?.textContent).toContain('Sample contact and legal details, and social links');
+    expect(utilityBar?.textContent).toContain('Sample contact details and social links');
     expect(compiled.querySelector('.site-header .header-cta')?.textContent).toContain('Donate now');
     expect(compiled.querySelector('.site-header .header-cta')?.getAttribute('href')).toBe('/donate');
     expect(compiled.querySelector('.legal-strip')).toBeNull();
@@ -71,14 +72,15 @@ describe('App', () => {
     expect(navigation?.classList.contains('is-open')).toBe(false);
   });
 
-  it('should show donation details 10 seconds after the first render', async () => {
+  it('should show donation details 10 seconds after entering the home page', async () => {
     vi.useFakeTimers();
     const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
     fixture.detectChanges();
     await fixture.whenStable();
+    await router.navigateByUrl('/home');
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelectorAll('.brand-logo')).toHaveLength(2);
     expect(compiled.querySelector('[role="dialog"]')).toBeNull();
 
     await vi.advanceTimersByTimeAsync(9_999);
@@ -100,6 +102,21 @@ describe('App', () => {
     dialog?.querySelector<HTMLButtonElement>('.dialog-close')?.click();
     fixture.detectChanges();
     expect(compiled.querySelector('[role="dialog"]')).toBeNull();
+    vi.useRealTimers();
+  });
+
+  it('should not show donation details outside the home page', async () => {
+    vi.useFakeTimers();
+    const fixture = TestBed.createComponent(App);
+    const router = TestBed.inject(Router);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await router.navigateByUrl('/admin');
+
+    await vi.advanceTimersByTimeAsync(10_000);
+    fixture.detectChanges();
+
+    expect((fixture.nativeElement as HTMLElement).querySelector('[role="dialog"]')).toBeNull();
     vi.useRealTimers();
   });
 });

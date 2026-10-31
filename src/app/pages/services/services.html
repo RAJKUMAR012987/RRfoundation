@@ -1,57 +1,247 @@
-<section class="services-intro" aria-labelledby="services-title">
-  <p class="eyebrow">Our work</p>
-  <h1 id="services-title">Care that starts with listening.</h1>
-  <p>
-    Every community is different. Our work begins with the people who know their community best and grows
-    from the priorities they share.
-  </p>
-</section>
-
-<section class="initiative-section" aria-label="Areas of focus">
-  <article class="initiative-card">
-    <div class="initiative-icon icon-sage" aria-hidden="true">✳</div>
-    <p class="eyebrow">01 / Learning</p>
-    <h2>Learning &amp; opportunity</h2>
-    <p>Encouraging learning, practical skills, and access to new opportunities at every stage of life.</p>
-    <a class="text-link" routerLink="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
-  </article>
-  <article class="initiative-card">
-    <div class="initiative-icon icon-ochre" aria-hidden="true">⌂</div>
-    <p class="eyebrow">02 / Wellbeing</p>
-    <h2>Care &amp; wellbeing</h2>
-    <p>Supporting thoughtful, inclusive approaches to everyday care, health, and wellbeing.</p>
-    <a class="text-link" routerLink="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
-  </article>
-  <article class="initiative-card">
-    <div class="initiative-icon icon-rose" aria-hidden="true">↗</div>
-    <p class="eyebrow">03 / Resilience</p>
-    <h2>Community resilience</h2>
-    <p>Bringing neighbours together to strengthen local connections and prepare for change.</p>
-    <a class="text-link" routerLink="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
-  </article>
-  <article class="initiative-card">
-    <div class="initiative-icon icon-blue" aria-hidden="true">◎</div>
-    <p class="eyebrow">04 / Livelihoods</p>
-    <h2>Skills &amp; livelihoods</h2>
-    <p>Making room for people to share their skills, build confidence, and explore livelihoods.</p>
-    <a class="text-link" routerLink="/contact">Start a conversation <span aria-hidden="true">↗</span></a>
-  </article>
-</section>
-
-<section class="approach-band" aria-labelledby="approach-title">
-  <div>
-    <p class="eyebrow">How we work</p>
-    <h2 id="approach-title">No one knows a community better than the people who call it home.</h2>
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="sw-hero" aria-labelledby="services-title">
+  <div class="sw-hero__bg" aria-hidden="true">
+    <img
+      ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1800&q=85"
+      fill
+      priority
+      alt=""
+    />
+    <div class="sw-hero__overlay"></div>
   </div>
-  <div class="approach-list">
-    <p><span>01</span> Listen and understand</p>
-    <p><span>02</span> Plan side by side</p>
-    <p><span>03</span> Learn and adapt together</p>
+  <div class="sw-hero__body">
+    <span class="sw-pill">
+      <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Community-led programmes
+    </span>
+    <h1 id="services-title">Care that starts<br/>with listening.</h1>
+    <p>Every community is different. Our programmes begin with the people who know their community best — and grow from the priorities they share.</p>
+    <div class="sw-hero__ctas">
+      <a class="sw-btn sw-btn--gold" href="#programmes">Explore programmes</a>
+      <a class="sw-btn sw-btn--ghost" routerLink="/donate">Support our work</a>
+    </div>
   </div>
 </section>
 
-<section class="page-cta" aria-labelledby="services-cta-title">
-  <p class="eyebrow">Have a shared idea?</p>
-  <h2 id="services-cta-title">Let’s explore what we can do together.</h2>
-  <a class="button" routerLink="/contact">Get in touch <span aria-hidden="true">↗</span></a>
+<!-- ═══════════════════════════════════════════════
+     IMPACT NUMBERS
+═══════════════════════════════════════════════ -->
+<div class="sw-numbers" aria-label="Impact numbers">
+  <div class="sw-num">
+    <strong>12,000+</strong><span>Lives touched</span>
+  </div>
+  <div class="sw-num-sep" aria-hidden="true"></div>
+  <div class="sw-num">
+    <strong>4</strong><span>Active programmes</span>
+  </div>
+  <div class="sw-num-sep" aria-hidden="true"></div>
+  <div class="sw-num">
+    <strong>98%</strong><span>Funds to beneficiaries</span>
+  </div>
+  <div class="sw-num-sep" aria-hidden="true"></div>
+  <div class="sw-num">
+    <strong>5+</strong><span>Years of service</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PROGRAMMES — 4 big cards
+═══════════════════════════════════════════════ -->
+<section id="programmes" class="sw-programmes" aria-labelledby="programmes-title">
+  <div class="sw-programmes__head">
+    <span class="sw-eyebrow">What we do</span>
+    <h2 id="programmes-title">Four programmes. One shared mission.</h2>
+    <p>Each initiative is community-led and responds to priorities shaped by the people it serves.</p>
+  </div>
+
+  <div class="sw-prog-grid">
+
+    <!-- Education -->
+    <article class="sw-prog-card sw-prog--edu" aria-labelledby="prog-edu">
+      <div class="sw-prog-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80"
+          width="900" height="600" loading="lazy"
+          alt="Children learning in a classroom"
+        />
+        <span class="sw-prog-card__num" aria-hidden="true">01</span>
+      </div>
+      <div class="sw-prog-card__body">
+        <span class="sw-prog-card__tag">📚 Education</span>
+        <h3 id="prog-edu">Learning &amp; Opportunity</h3>
+        <p>Creating space for curiosity, practical skills, and pathways to a brighter future — from early learning to adult education.</p>
+        <ul class="sw-prog-card__points">
+          <li>School supplies &amp; scholarships</li>
+          <li>After-school tutoring centres</li>
+          <li>Adult literacy programmes</li>
+        </ul>
+        <a class="sw-prog-card__link" routerLink="/donate">Support this cause
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Healthcare -->
+    <article class="sw-prog-card sw-prog--health" aria-labelledby="prog-health">
+      <div class="sw-prog-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80"
+          width="900" height="600" loading="lazy"
+          alt="Healthcare worker helping a community member"
+        />
+        <span class="sw-prog-card__num" aria-hidden="true">02</span>
+      </div>
+      <div class="sw-prog-card__body">
+        <span class="sw-prog-card__tag">🏥 Healthcare</span>
+        <h3 id="prog-health">Care &amp; Wellbeing</h3>
+        <p>Supporting everyday wellbeing with free medical camps, medicines, and preventive care shaped around local needs.</p>
+        <ul class="sw-prog-card__points">
+          <li>Free mobile medical camps</li>
+          <li>Maternal &amp; child health support</li>
+          <li>Mental health awareness</li>
+        </ul>
+        <a class="sw-prog-card__link" routerLink="/donate">Support this cause
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Women -->
+    <article class="sw-prog-card sw-prog--women" aria-labelledby="prog-women">
+      <div class="sw-prog-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80"
+          width="900" height="600" loading="lazy"
+          alt="Women in a vocational training session"
+        />
+        <span class="sw-prog-card__num" aria-hidden="true">03</span>
+      </div>
+      <div class="sw-prog-card__body">
+        <span class="sw-prog-card__tag">👩‍💼 Women Empowerment</span>
+        <h3 id="prog-women">Skills &amp; Independence</h3>
+        <p>Vocational training, micro-loans and mentorship to help women build lasting financial independence and confidence.</p>
+        <ul class="sw-prog-card__points">
+          <li>Vocational skills &amp; tailoring</li>
+          <li>Micro-enterprise seed funding</li>
+          <li>Legal awareness &amp; rights</li>
+        </ul>
+        <a class="sw-prog-card__link" routerLink="/donate">Support this cause
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Hunger -->
+    <article class="sw-prog-card sw-prog--hunger" aria-labelledby="prog-hunger">
+      <div class="sw-prog-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=80"
+          width="900" height="600" loading="lazy"
+          alt="Children receiving nutritious meals"
+        />
+        <span class="sw-prog-card__num" aria-hidden="true">04</span>
+      </div>
+      <div class="sw-prog-card__body">
+        <span class="sw-prog-card__tag">🍱 Child Hunger</span>
+        <h3 id="prog-hunger">Nutrition &amp; Food Security</h3>
+        <p>Nutritious mid-day meals, food kits and supplementary nutrition programmes to end hunger for children in need.</p>
+        <ul class="sw-prog-card__points">
+          <li>Daily school meal programme</li>
+          <li>Monthly nutrition kits</li>
+          <li>Community kitchen &amp; gardens</li>
+        </ul>
+        <a class="sw-prog-card__link" routerLink="/donate">Support this cause
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     HOW WE WORK BAND
+═══════════════════════════════════════════════ -->
+<section class="sw-approach" aria-labelledby="approach-title">
+  <div class="sw-approach__copy">
+    <span class="sw-eyebrow sw-eyebrow--gold">How we work</span>
+    <h2 id="approach-title">No one knows a community<br/>better than the people<br/>who call it home.</h2>
+    <p>We don't bring ready-made solutions. We bring respect, resources, and a commitment to stay alongside until the work is done.</p>
+    <a class="sw-btn sw-btn--light-outline" routerLink="/about">Learn our story
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+  <div class="sw-approach__steps">
+    <div class="sw-step">
+      <div class="sw-step__num">01</div>
+      <div class="sw-step__body">
+        <h3>Listen and understand</h3>
+        <p>Start with local voices, lived experience, and the knowledge already inside every community.</p>
+      </div>
+    </div>
+    <div class="sw-step">
+      <div class="sw-step__num">02</div>
+      <div class="sw-step__body">
+        <h3>Plan side by side</h3>
+        <p>Shape practical responses together, with dignity, care, and shared purpose at every step.</p>
+      </div>
+    </div>
+    <div class="sw-step">
+      <div class="sw-step__num">03</div>
+      <div class="sw-step__body">
+        <h3>Deliver and learn</h3>
+        <p>Act, measure impact honestly, and keep improving until the change is real and lasting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     VOLUNTEER CTA
+═══════════════════════════════════════════════ -->
+<section class="sw-volunteer" aria-labelledby="vol-title">
+  <div class="sw-volunteer__inner">
+    <div class="sw-volunteer__copy">
+      <span class="sw-eyebrow">Get involved</span>
+      <h2 id="vol-title">Your skills can change lives.</h2>
+      <p>Whether you're a teacher, doctor, entrepreneur, or just someone who cares — there's a place for you in our work.</p>
+    </div>
+    <div class="sw-volunteer__cards">
+      <div class="sw-vol-card">
+        <span aria-hidden="true">🕐</span>
+        <h3>Give your time</h3>
+        <p>Join a programme as a volunteer and work directly with communities.</p>
+        <a routerLink="/contact">Volunteer now</a>
+      </div>
+      <div class="sw-vol-card">
+        <span aria-hidden="true">🧠</span>
+        <h3>Share your skills</h3>
+        <p>Offer your professional expertise — teaching, healthcare, design, legal, and more.</p>
+        <a routerLink="/contact">Get in touch</a>
+      </div>
+      <div class="sw-vol-card">
+        <span aria-hidden="true">💛</span>
+        <h3>Donate</h3>
+        <p>Every rupee goes directly to community programmes. 80G tax exemption available.</p>
+        <a routerLink="/donate">Donate now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CLOSING CTA
+═══════════════════════════════════════════════ -->
+<section class="sw-closing" aria-labelledby="sw-closing-title">
+  <span class="sw-eyebrow sw-eyebrow--gold">Have a shared idea?</span>
+  <h2 id="sw-closing-title">Let's explore what we can do together.</h2>
+  <p>Reach out and start a conversation. We believe the best work begins with listening.</p>
+  <div class="sw-closing__actions">
+    <a class="sw-btn sw-btn--light" routerLink="/contact">Get in touch
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+    <a class="sw-btn sw-btn--outline-light" routerLink="/donate">Donate to our work</a>
+  </div>
 </section>

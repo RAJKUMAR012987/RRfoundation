@@ -1,83 +1,454 @@
-<section class="donate-hero" aria-labelledby="donate-title">
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="dh-hero" aria-labelledby="donate-page-title">
   <img
     ngSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=2000&q=85"
     fill
     priority
     alt="Volunteers coming together to support their community"
   />
-  <div class="donate-shade"></div>
-  <div class="donate-hero-copy">
-    <p class="eyebrow">Give with care</p>
-    <h1 id="donate-title">Every act of support can help possibility take root.</h1>
-    <p>There are many ways to stand alongside a community. Start with what you can share.</p>
-    <a class="button donate-hero-button" href="#ways-to-help">Explore ways to help <span aria-hidden="true">↓</span></a>
-  </div>
-</section>
-
-<section id="ways-to-help" class="ways-section" aria-labelledby="ways-title">
-  <div class="section-heading">
-    <p class="eyebrow">Give what you can</p>
-    <h2 id="ways-title">Support can take many forms.</h2>
-    <p>Time, knowledge, resources, and generosity can all help strengthen shared work.</p>
-  </div>
-  <div class="ways-grid">
-    <article class="way-card">
-      <span aria-hidden="true">01</span>
-      <h3>Share your time</h3>
-      <p>Offer your time and energy to projects shaped by community priorities.</p>
-      <a class="text-link" routerLink="/contact">Ask about volunteering <span aria-hidden="true">↗</span></a>
-    </article>
-    <article class="way-card">
-      <span aria-hidden="true">02</span>
-      <h3>Share your skills</h3>
-      <p>Bring your experience, ideas, and skills to a shared effort.</p>
-      <a class="text-link" routerLink="/contact">Explore collaboration <span aria-hidden="true">↗</span></a>
-    </article>
-    <article class="way-card">
-      <span aria-hidden="true">03</span>
-      <h3>Give thoughtfully</h3>
-      <p>Support community-led work with a contribution through a verified channel.</p>
-      <a class="text-link" routerLink="/contact">Ask how to give <span aria-hidden="true">↗</span></a>
-    </article>
-  </div>
-</section>
-
-<section class="online-giving" aria-labelledby="online-giving-title">
-  <div class="online-giving-card">
-    <div class="online-giving-copy">
-      <p class="eyebrow">A new way to give</p>
-      <h2 id="online-giving-title">Online donations are coming soon.</h2>
-      <p>
-        We’re preparing a secure online payment option. Until it’s ready, no payment information is
-        collected on this page.
-      </p>
+  <div class="dh-hero__shade"></div>
+  <div class="dh-hero__body">
+    <span class="dh-hero__pill">Give with purpose</span>
+    <h1 id="donate-page-title">Your generosity<br/>changes lives.</h1>
+    <p>Every rupee reaches real people through transparent, community-led programmes.</p>
+    <div class="dh-hero__ctas">
+      <a class="dh-btn dh-btn--gold" href="#donate-form">
+        Donate now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+      <a class="dh-btn dh-btn--ghost" routerLink="/about">Our story</a>
     </div>
-    <div class="demo-payment">
-      <div class="demo-code-art" aria-hidden="true">
-        <span class="demo-code-stamp">DEMO</span>
+  </div>
+
+  <!-- Trust badges -->
+  <div class="dh-hero__trust">
+    <div class="dh-trust-badge">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>100% Secure</span>
+    </div>
+    <div class="dh-trust-badge">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Tax Exemption u/s 80G</span>
+    </div>
+    <div class="dh-trust-badge">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <span>Powered by Razorpay</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     IMPACT STATS
+═══════════════════════════════════════════════ -->
+<div class="dh-stats" aria-label="Our impact in numbers">
+  <div class="dh-stat">
+    <strong>12,000+</strong>
+    <span>Lives touched</span>
+  </div>
+  <div class="dh-stat-divider" aria-hidden="true"></div>
+  <div class="dh-stat">
+    <strong>6</strong>
+    <span>Programmes running</span>
+  </div>
+  <div class="dh-stat-divider" aria-hidden="true"></div>
+  <div class="dh-stat">
+    <strong>98%</strong>
+    <span>Funds reach beneficiaries</span>
+  </div>
+  <div class="dh-stat-divider" aria-hidden="true"></div>
+  <div class="dh-stat">
+    <strong>5+</strong>
+    <span>Years of service</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CAUSE PICKER — full-width 4 big cards
+═══════════════════════════════════════════════ -->
+<div id="donate-form" class="dh-cause-section" aria-label="Choose a cause">
+  <div class="dh-cause-section__head">
+    <span class="dh-section-label">Step 1 — Choose your cause</span>
+    <h2>Where would you like to make a difference?</h2>
+  </div>
+  <div class="dh-cause-grid" role="group" aria-label="Donation causes">
+    @for (cat of categories; track cat.id) {
+      <button
+        type="button"
+        class="dh-cause-tile"
+        [class.is-active]="selectedCategory().id === cat.id"
+        [style.--cat-color]="cat.color"
+        (click)="selectCategory(cat)"
+        [attr.aria-pressed]="selectedCategory().id === cat.id"
+      >
+        <span class="dh-cause-tile__icon" aria-hidden="true">{{ cat.icon }}</span>
+        <span class="dh-cause-tile__label">{{ cat.label }}</span>
+        <span class="dh-cause-tile__desc">{{ cat.description }}</span>
+        <span class="dh-cause-tile__check" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+      </button>
+    }
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN: IMPACT INFO + FORM
+═══════════════════════════════════════════════ -->
+<div class="dh-main" aria-label="Donation section">
+
+  <!-- LEFT — Impact card (visible when cause chosen) -->
+  <aside class="dh-categories" aria-label="Your impact">
+    <div class="dh-impact-card" [style.--cat-color]="selectedCategory().color">
+      <div class="dh-impact-card__header">
+        <span class="dh-impact-card__emoji" aria-hidden="true">{{ selectedCategory().icon }}</span>
+        <div>
+          <strong>{{ selectedCategory().label }}</strong>
+          <p>{{ selectedCategory().description }}</p>
+        </div>
       </div>
-      <div class="demo-code-info">
-        <p class="eyebrow">Demo QR preview</p>
-        <p class="demo-code-value">{{ demoDonationCode() }}</p>
-        <p class="demo-code-warning">Not a payment QR and cannot be scanned. No payment can be made.</p>
-        <button class="demo-code-refresh" type="button" (click)="changeDemoDonationCode()">
-          Change demo letters
+      <div class="dh-impact-card__divider"></div>
+      <p class="dh-impact-card__sub">Your donation will go towards:</p>
+      <ul class="dh-impact-list" aria-label="Impact examples">
+        @if (selectedCategory().id === 'education') {
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹500 — textbooks for one child for a year</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹1,000 — school supplies for five children</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹5,000 — sponsors one student's scholarship</li>
+        }
+        @if (selectedCategory().id === 'health') {
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹500 — medicines for one family</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹1,000 — one free health check-up camp slot</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹5,000 — funds a mobile medical camp day</li>
+        }
+        @if (selectedCategory().id === 'women') {
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹500 — sewing kit for one woman</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹1,000 — one month of vocational training</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹5,000 — micro-loan seed fund for one entrepreneur</li>
+        }
+        @if (selectedCategory().id === 'hunger') {
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹500 — feeds 10 children for one day</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹1,000 — nutrition kit for one child for a month</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> ₹5,000 — mid-day meal programme for one class</li>
+        }
+      </ul>
+      <div class="dh-impact-card__footer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        98% of funds reach beneficiaries directly
+      </div>
+    </div>
+  </aside>
+
+  <!-- RIGHT — Payment form -->
+  <section class="dh-form-panel" aria-labelledby="form-heading">
+
+    @if (paymentState() === 'success') {
+
+      <!-- ── Success screen ── -->
+      <div class="dh-success" role="alert">
+        <div class="dh-success__circle">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Thank you for your gift!</h2>
+        <p>
+          Your donation of
+          <strong>₹{{ effectiveAmount.toLocaleString('en-IN') }}</strong>
+          towards <strong>{{ selectedCategory().label }}</strong> has been received.
+        </p>
+        @if (lastPaymentId()) {
+          <div class="dh-success__ref">
+            <span>Payment ID</span>
+            <code>{{ lastPaymentId() }}</code>
+          </div>
+        }
+        <p class="dh-success__note">
+          A receipt will be emailed to you. This payment qualifies for tax exemption under Section 80G.
+        </p>
+        <button class="dh-submit-btn" type="button" (click)="paymentState.set('idle')">
+          Make another donation
         </button>
       </div>
+
+    } @else {
+
+      <h2 id="form-heading" class="dh-form-panel__heading">
+        Complete your donation
+        <span class="dh-form-panel__cat-badge" [style.background]="selectedCategory().color">
+          {{ selectedCategory().icon }} {{ selectedCategory().label }}
+        </span>
+      </h2>
+
+      <form class="dh-form" (ngSubmit)="pay()" #donationForm="ngForm" novalidate>
+
+        <!-- ── STEP 1: Amount ── -->
+        <div class="dh-form__section">
+          <div class="dh-form__section-head">
+            <span class="dh-step-num" aria-hidden="true">1</span>
+            <span class="dh-form__section-title">Select amount</span>
+          </div>
+
+          <div class="dh-presets" role="group" aria-label="Preset donation amounts">
+            @for (amount of presetAmounts; track amount) {
+              <button
+                type="button"
+                class="dh-preset"
+                [class.is-active]="selectedPreset() === amount"
+                (click)="selectPreset(amount)"
+                [attr.aria-pressed]="selectedPreset() === amount"
+              >
+                <span class="dh-preset__currency">₹</span>{{ amount.toLocaleString('en-IN') }}
+              </button>
+            }
+          </div>
+
+          <div class="dh-custom-wrap">
+            <label for="custom-amount" class="dh-label">Or enter a custom amount</label>
+            <div class="dh-input-icon-wrap">
+              <span class="dh-input-prefix" aria-hidden="true">₹</span>
+              <input
+                id="custom-amount"
+                class="dh-input dh-input--amount"
+                [class.is-active]="selectedPreset() === null"
+                type="number"
+                name="customAmount"
+                min="10"
+                step="1"
+                placeholder="Enter amount"
+                [(ngModel)]="customAmountInput"
+                (focus)="onCustomAmountFocus()"
+                aria-label="Custom donation amount in rupees"
+              />
+            </div>
+            @if (selectedPreset() === null && customAmountInput && effectiveAmount < 10) {
+              <p class="dh-field-err" role="alert">Minimum donation is ₹10.</p>
+            }
+          </div>
+
+          <!-- Running total chip -->
+          @if (isAmountValid) {
+            <div class="dh-total-chip" aria-live="polite">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Donating <strong>₹{{ effectiveAmount.toLocaleString('en-IN') }}</strong> to {{ selectedCategory().label }}
+            </div>
+          }
+        </div>
+
+        <!-- ── STEP 2: Donor details ── -->
+        <div class="dh-form__section">
+          <div class="dh-form__section-head">
+            <span class="dh-step-num" aria-hidden="true">2</span>
+            <span class="dh-form__section-title">Your details</span>
+            <span class="dh-optional">optional</span>
+          </div>
+
+          <!-- Anonymous toggle -->
+          <label class="dh-toggle-row">
+            <div class="dh-toggle" [class.is-on]="isAnonymous">
+              <input
+                type="checkbox"
+                name="isAnonymous"
+                [(ngModel)]="isAnonymous"
+                role="switch"
+                [attr.aria-checked]="isAnonymous"
+              />
+              <span class="dh-toggle__thumb"></span>
+            </div>
+            <span>Donate anonymously</span>
+          </label>
+
+          @if (!isAnonymous) {
+            <div class="dh-fields-grid">
+              <div class="dh-field">
+                <label class="dh-label" for="donor-name">Full name</label>
+                <input
+                  id="donor-name"
+                  class="dh-input"
+                  type="text"
+                  name="donorName"
+                  placeholder="Ravi Kumar"
+                  [(ngModel)]="donorName"
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="dh-field">
+                <label class="dh-label" for="donor-phone">Phone</label>
+                <input
+                  id="donor-phone"
+                  class="dh-input"
+                  type="tel"
+                  name="donorPhone"
+                  placeholder="+91 98765 43210"
+                  [(ngModel)]="donorPhone"
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div class="dh-field dh-field--full">
+                <label class="dh-label" for="donor-email">Email address</label>
+                <input
+                  id="donor-email"
+                  class="dh-input"
+                  type="email"
+                  name="donorEmail"
+                  placeholder="ravi@example.com"
+                  [(ngModel)]="donorEmail"
+                  autocomplete="email"
+                />
+              </div>
+
+            </div>
+          }
+        </div>
+
+        <!-- ── STEP 3: Pay ── -->
+        <div class="dh-form__section dh-form__section--pay">
+          <div class="dh-form__section-head">
+            <span class="dh-step-num" aria-hidden="true">3</span>
+            <span class="dh-form__section-title">Confirm &amp; pay</span>
+          </div>
+
+          @if (paymentState() === 'error') {
+            <div class="dh-error-banner" role="alert">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              {{ paymentError() }}
+            </div>
+          }
+
+          <button
+            class="dh-submit-btn"
+            type="submit"
+            [disabled]="!isAmountValid || paymentState() === 'processing'"
+            [attr.aria-busy]="paymentState() === 'processing'"
+          >
+            @if (paymentState() === 'processing') {
+              <span class="dh-spinner" aria-hidden="true"></span>
+              Processing…
+            } @else {
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Pay ₹{{ isAmountValid ? effectiveAmount.toLocaleString('en-IN') : '—' }} securely
+            }
+          </button>
+
+          <div class="dh-trust-row">
+            <span class="dh-trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              256-bit SSL
+            </span>
+            <span class="dh-trust-divider" aria-hidden="true">·</span>
+            <span class="dh-trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Razorpay secured
+            </span>
+            <span class="dh-trust-divider" aria-hidden="true">·</span>
+            <span class="dh-trust-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              80G tax benefit
+            </span>
+          </div>
+
+          <p class="dh-legal">
+            By donating you agree to our
+            <a routerLink="/about" class="dh-legal__link">terms of use</a>.
+            RRNGO is a registered NGO. Donations may be eligible for tax exemption under Section 80G of the Income Tax Act.
+          </p>
+        </div>
+
+      </form>
+    }
+
+  </section>
+</div>
+═══════════════════════════════════════════════ -->
+<section class="dh-how" aria-labelledby="how-title">
+  <div class="dh-section-label" style="text-align:center;">How it works</div>
+  <h2 id="how-title">Simple, transparent giving.</h2>
+  <div class="dh-how__steps">
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">1</div>
+      <h3>Choose a cause</h3>
+      <p>Pick the programme that matters most to you from our six categories.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">2</div>
+      <h3>Set your amount</h3>
+      <p>Select a preset or enter any amount. Every rupee counts.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">3</div>
+      <h3>Pay securely</h3>
+      <p>UPI, cards, net banking — all via Razorpay's secure checkout.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">4</div>
+      <h3>Get your receipt</h3>
+      <p>Instant email receipt with 80G details for tax exemption.</p>
     </div>
   </div>
 </section>
 
-<aside class="donation-notice">
-  <span class="notice-icon" aria-hidden="true">i</span>
-  <p>
-    <strong>Donations are not processed on this page.</strong> Online payments will be enabled after a
-    verified payment provider and the organization’s legal and donation details are in place.
-  </p>
-</aside>
+<!-- ═══════════════════════════════════════════════
+     CLOSING CTA
+═══════════════════════════════════════════════ -->
+<section class="dh-closing" aria-labelledby="closing-title">
+  <div class="dh-closing__body">
+    <span class="dh-closing__eyebrow">Together we grow</span>
+    <h2 id="closing-title">Care is something we create together.</h2>
+    <p>Join thousands of supporters who are helping build a more equitable tomorrow.</p>
+    <div class="dh-closing__actions">
+      <a class="dh-btn dh-btn--light" href="#donate-form">Donate now</a>
+      <a class="dh-btn dh-btn--outline-light" routerLink="/contact">Get involved</a>
+    </div>
+  </div>
+</section>
 
-<section class="donate-closing" aria-labelledby="donate-closing-title">
-  <p class="eyebrow">Thank you for standing with people</p>
-  <h2 id="donate-closing-title">Care is something we create together.</h2>
-  <a class="button button-light" routerLink="/about">Learn about RRNGO <span aria-hidden="true">↗</span></a>
+<!-- ═══════════════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════════════ -->
+<section class="dh-how" aria-labelledby="how-title">
+  <div class="dh-section-label" style="text-align:center;">How it works</div>
+  <h2 id="how-title">Simple, transparent giving.</h2>
+  <div class="dh-how__steps">
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">1</div>
+      <h3>Choose a cause</h3>
+      <p>Pick the programme that matters most to you from our four categories.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">2</div>
+      <h3>Set your amount</h3>
+      <p>Select a preset or enter any amount. Every rupee counts.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">3</div>
+      <h3>Pay securely</h3>
+      <p>UPI, cards, net banking — all via Razorpay's secure checkout.</p>
+    </div>
+    <div class="dh-how__connector" aria-hidden="true"></div>
+    <div class="dh-how__step">
+      <div class="dh-how__step-num">4</div>
+      <h3>Get your receipt</h3>
+      <p>Instant email receipt with 80G details for tax exemption.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CLOSING CTA
+═══════════════════════════════════════════════ -->
+<section class="dh-closing" aria-labelledby="closing-title">
+  <div class="dh-closing__body">
+    <span class="dh-closing__eyebrow">Together we grow</span>
+    <h2 id="closing-title">Care is something we create together.</h2>
+    <p>Join thousands of supporters who are helping build a more equitable tomorrow.</p>
+    <div class="dh-closing__actions">
+      <a class="dh-btn dh-btn--light" href="#donate-form">Donate now</a>
+      <a class="dh-btn dh-btn--outline-light" routerLink="/contact">Get involved</a>
+    </div>
+  </div>
 </section>

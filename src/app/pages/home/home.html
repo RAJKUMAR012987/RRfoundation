@@ -1,202 +1,379 @@
-<section class="home-hero" aria-labelledby="home-title">
-  <div class="hero-content">
-    <p class="eyebrow"><span aria-hidden="true">✳</span> A community-led nonprofit</p>
-    <h1 id="home-title">Change grows when communities lead.</h1>
-    <p class="hero-copy">
-      We work alongside people to grow opportunity, wellbeing, and lasting change—shaped by the communities at its heart.
-    </p>
-    <div class="hero-actions">
-      <a class="button" routerLink="/services">See what we do <span aria-hidden="true">↗</span></a>
-      <a class="button button-light" routerLink="/contact">Volunteer with us</a>
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hh-hero" aria-labelledby="home-title">
+  <div class="hh-hero__bg" aria-hidden="true">
+    @if (homeVideoUrl(); as videoUrl) {
+      <video
+        class="hh-hero__video"
+        [src]="videoUrl"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+        tabindex="-1"
+      ></video>
+    } @else {
+      <img
+        ngSrc="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1800&q=85"
+        fill
+        priority
+        alt=""
+      />
+    }
+    <div class="hh-hero__overlay"></div>
+  </div>
+
+  <div class="hh-hero__body">
+    <div class="hh-hero__content">
+      <span class="hh-pill">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Community-led nonprofit · Est. 2019
+      </span>
+      <h1 id="home-title">Change grows<br/>when communities<br/><em>lead.</em></h1>
+      <p class="hh-hero__sub">
+        We work alongside people — not for them — to grow opportunity, wellbeing,
+        and lasting change rooted in community voices.
+      </p>
+      <div class="hh-hero__actions">
+        <a class="hh-btn hh-btn--primary" routerLink="/donate">
+          Donate now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+        <a class="hh-btn hh-btn--ghost" routerLink="/services">See our work</a>
+      </div>
+      <div class="hh-hero__badges">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 80G Tax Exemption</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Verified NGO</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 100% Transparent</span>
+      </div>
     </div>
-    <p class="hero-promise"><span aria-hidden="true">✓</span> Local voices. Shared decisions. Community-led action.</p>
-  </div>
-  <div class="hero-visual">
-    <img
-      class="hero-image"
-      ngSrc="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1400&q=85"
-      width="1400"
-      height="1100"
-      priority
-      alt="Community members coming together to make a difference"
-    />
-    <div class="hero-photo-note">
-      <span class="photo-note-icon" aria-hidden="true">✳</span>
-      <p><strong>Led by people.</strong><br />Rooted in community.</p>
+
+    <!-- Logo card floating -->
+    <div class="hh-hero__logo-card" aria-hidden="true">
+      <img
+        ngSrc="/rr-trust-logo.jpeg"
+        width="762"
+        height="617"
+        alt="RR Trust and Foundation"
+      />
+      <span>RR Trust &amp; Foundation</span>
     </div>
   </div>
-</section>
 
-<section class="mission-section" aria-labelledby="mission-title">
-  <div class="mission-mark" aria-hidden="true">“</div>
-  <div class="mission-copy">
-    <p class="eyebrow">Our belief</p>
-    <h2 id="mission-title">People closest to the challenge belong at the heart of the solution.</h2>
-    <p>
-      We listen first, then work side by side. Because lasting progress is strongest when communities
-      shape the decisions, priorities, and actions that affect their lives.
-    </p>
-    <a class="text-link" routerLink="/about">Get to know our approach <span aria-hidden="true">↗</span></a>
+  <!-- Scroll cue -->
+  <div class="hh-hero__scroll" aria-hidden="true">
+    <span></span>
   </div>
 </section>
 
-<section class="approach-section" aria-labelledby="approach-title">
-  <div class="section-heading">
-    <p class="eyebrow">How change takes root</p>
-    <h2 id="approach-title">Good work is done with people, not for them.</h2>
-    <p>We build trust over time and let community priorities guide each step.</p>
+<!-- ═══════════════════════════════════════════════
+     IMPACT NUMBERS
+═══════════════════════════════════════════════ -->
+<div class="hh-numbers" aria-label="Our impact">
+  <div class="hh-number">
+    <strong>12,000+</strong>
+    <span>Lives touched</span>
   </div>
-  <div class="approach-steps">
-    <article>
-      <span class="step-number">01</span>
-      <div><h3>Listen</h3><p>Start with local voices, lived experience, and the strengths already in a community.</p></div>
+  <div class="hh-number-sep" aria-hidden="true"></div>
+  <div class="hh-number">
+    <strong>4</strong>
+    <span>Active causes</span>
+  </div>
+  <div class="hh-number-sep" aria-hidden="true"></div>
+  <div class="hh-number">
+    <strong>98%</strong>
+    <span>Funds reach beneficiaries</span>
+  </div>
+  <div class="hh-number-sep" aria-hidden="true"></div>
+  <div class="hh-number">
+    <strong>5+</strong>
+    <span>Years of service</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     CAUSES — 4 cards
+═══════════════════════════════════════════════ -->
+<section class="hh-causes" aria-labelledby="causes-title">
+  <div class="hh-causes__head">
+    <span class="hh-eyebrow">What we stand for</span>
+    <h2 id="causes-title">Four causes. One mission.</h2>
+    <p>Every programme is shaped by the people it serves. Here's where your support goes.</p>
+  </div>
+
+  <div class="hh-causes__grid">
+    <article class="hh-cause-card hh-cause--education">
+      <div class="hh-cause-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=900&q=80"
+          width="900"
+          height="600"
+          loading="lazy"
+          alt="Children learning in a classroom"
+        />
+      </div>
+      <div class="hh-cause-card__body">
+        <span class="hh-cause-card__icon" aria-hidden="true">📚</span>
+        <h3>Education</h3>
+        <p>Books, scholarships and safe spaces to learn. Every child deserves a future.</p>
+        <a class="hh-cause-card__link" routerLink="/donate">
+          Support Education
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
     </article>
-    <article>
-      <span class="step-number">02</span>
-      <div><h3>Work together</h3><p>Shape practical responses side by side, with dignity, care, and shared purpose.</p></div>
+
+    <article class="hh-cause-card hh-cause--health">
+      <div class="hh-cause-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=80"
+          width="900"
+          height="600"
+          loading="lazy"
+          alt="Healthcare worker helping a community member"
+        />
+      </div>
+      <div class="hh-cause-card__body">
+        <span class="hh-cause-card__icon" aria-hidden="true">🏥</span>
+        <h3>Healthcare</h3>
+        <p>Free medical camps, medicines and preventive care for underserved communities.</p>
+        <a class="hh-cause-card__link" routerLink="/donate">
+          Support Healthcare
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
     </article>
-    <article>
-      <span class="step-number">03</span>
-      <div><h3>Keep learning</h3><p>Reflect, adapt, and grow solutions that belong to the people they serve.</p></div>
+
+    <article class="hh-cause-card hh-cause--women">
+      <div class="hh-cause-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=80"
+          width="900"
+          height="600"
+          loading="lazy"
+          alt="Women in a vocational training programme"
+        />
+      </div>
+      <div class="hh-cause-card__body">
+        <span class="hh-cause-card__icon" aria-hidden="true">👩‍💼</span>
+        <h3>Women Empowerment</h3>
+        <p>Vocational training, micro-loans and mentorship to build lasting independence.</p>
+        <a class="hh-cause-card__link" routerLink="/donate">
+          Support Women
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="hh-cause-card hh-cause--hunger">
+      <div class="hh-cause-card__img">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=80"
+          width="900"
+          height="600"
+          loading="lazy"
+          alt="Children receiving nutritious meals at school"
+        />
+      </div>
+      <div class="hh-cause-card__body">
+        <span class="hh-cause-card__icon" aria-hidden="true">🍱</span>
+        <h3>Child Hunger</h3>
+        <p>Nutritious meals, mid-day feeding programmes and food security for children in need.</p>
+        <a class="hh-cause-card__link" routerLink="/donate">
+          Fight Hunger
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
     </article>
   </div>
 </section>
 
-<section class="founder-section" aria-labelledby="founder-title">
-  <div class="founder-mark" aria-hidden="true">“</div>
-  <div class="founder-message">
-    <p class="eyebrow">A message from our founder</p>
-    <h2 id="founder-title">
-      “Real change begins when we listen to one another and make space for communities to lead.”
+<!-- ═══════════════════════════════════════════════
+     MISSION BANNER
+═══════════════════════════════════════════════ -->
+<section class="hh-mission" aria-labelledby="mission-title">
+  <div class="hh-mission__quote" aria-hidden="true">"</div>
+  <div class="hh-mission__copy">
+    <span class="hh-eyebrow hh-eyebrow--light">{{ belief().eyebrow }}</span>
+    <h2 id="mission-title">
+      {{ belief().heading }}
     </h2>
-    <p class="founder-name">[Founder name]</p>
-    <p class="founder-note">Sample message — replace with the founder’s approved words and name.</p>
+    <p>{{ belief().body }}</p>
+    <a class="hh-text-link hh-text-link--light" [routerLink]="belief().link_url">
+      {{ belief().link_label }}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
   </div>
 </section>
 
-<section class="work-section" aria-labelledby="work-title">
-  <div class="section-heading">
-    <p class="eyebrow">Our areas of focus</p>
-    <h2 id="work-title">Working together for stronger communities.</h2>
-    <p>Our work grows around the priorities people identify in their own communities.</p>
+<!-- ═══════════════════════════════════════════════
+     HOW WE WORK
+═══════════════════════════════════════════════ -->
+<section class="hh-how" aria-labelledby="how-title">
+  <div class="hh-how__head">
+    <span class="hh-eyebrow">Our approach</span>
+    <h2 id="how-title">Good work is done<br/><em>with</em> people, not for them.</h2>
   </div>
-  <div class="work-cards">
-    <article class="work-card work-card-image">
-      <img
-        ngSrc="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1000&q=80"
-        width="1000"
-        height="700"
-        loading="lazy"
-        alt="Children learning together in a classroom"
-      />
-      <div class="work-card-body">
-        <span class="card-number">01 <span>Opportunity</span></span>
-        <h3>Learning &amp; opportunity</h3>
-        <p>Creating space for curiosity, skills, and pathways to a brighter future.</p>
-        <a class="text-link" routerLink="/services" aria-label="Explore learning and opportunity work">Explore <span aria-hidden="true">↗</span></a>
+  <div class="hh-how__steps">
+    <div class="hh-how__step">
+      <div class="hh-how__step-n">01</div>
+      <div class="hh-how__step-body">
+        <h3>Listen</h3>
+        <p>Start with local voices, lived experience, and the strengths already inside every community.</p>
       </div>
-    </article>
-    <article class="work-card work-card-image">
-      <img
-        ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1000&q=80"
-        width="1000"
-        height="700"
-        loading="lazy"
-        alt="Volunteers preparing supplies for a community"
-      />
-      <div class="work-card-body">
-        <span class="card-number">02 <span>Wellbeing</span></span>
-        <h3>Care &amp; wellbeing</h3>
-        <p>Supporting everyday wellbeing with care shaped around local needs.</p>
-        <a class="text-link" routerLink="/services" aria-label="Explore care and wellbeing work">Explore <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hh-how__connector" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </div>
+    <div class="hh-how__step">
+      <div class="hh-how__step-n">02</div>
+      <div class="hh-how__step-body">
+        <h3>Work together</h3>
+        <p>Shape practical responses side by side, with dignity, care, and shared purpose at every step.</p>
       </div>
-    </article>
-    <article class="work-card work-card-image">
-      <img
-        ngSrc="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80"
-        width="1000"
-        height="700"
-        loading="lazy"
-        alt="Community members sharing ideas around a table"
-      />
-      <div class="work-card-body">
-        <span class="card-number">03 <span>Resilience</span></span>
-        <h3>Community resilience</h3>
-        <p>Strengthening local connections so people can shape change together.</p>
-        <a class="text-link" routerLink="/services" aria-label="Explore community resilience work">Explore <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hh-how__connector" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </div>
+    <div class="hh-how__step">
+      <div class="hh-how__step-n">03</div>
+      <div class="hh-how__step-body">
+        <h3>Keep learning</h3>
+        <p>Reflect, adapt, and grow solutions that truly belong to the people they serve.</p>
       </div>
-    </article>
+    </div>
   </div>
 </section>
 
-<section class="work-photos" aria-labelledby="work-photos-title">
-  <div class="section-heading">
-    <p class="eyebrow">Moments of connection</p>
-    <h2 id="work-photos-title">A glimpse of community in action.</h2>
-    <p>These demo photos help show the spirit of our work. We look forward to sharing real moments from RRNGO.</p>
+<!-- ═══════════════════════════════════════════════
+     PHOTO MOMENTS
+═══════════════════════════════════════════════ -->
+<section class="hh-photos" aria-labelledby="photos-title">
+  <div class="hh-photos__head">
+    <span class="hh-eyebrow">Moments of connection</span>
+    <h2 id="photos-title">Community in action.</h2>
   </div>
-  <div class="work-photo-grid">
-    <figure>
+  <div class="hh-photos__grid">
+    <figure class="hh-photo hh-photo--tall">
       <img
         ngSrc="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=80"
         width="900"
-        height="700"
+        height="1200"
         loading="lazy"
         alt="Young people taking part in a group activity"
       />
-      <figcaption><span>Learning together</span><small>Demo photo</small></figcaption>
+      <figcaption>Learning together</figcaption>
     </figure>
-    <figure>
+    <figure class="hh-photo">
       <img
         ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=900&q=80"
         width="900"
-        height="700"
+        height="600"
         loading="lazy"
         alt="Volunteers preparing supplies for a community"
       />
-      <figcaption><span>Showing up for one another</span><small>Demo photo</small></figcaption>
+      <figcaption>Showing up for one another</figcaption>
     </figure>
-    <figure>
+    <figure class="hh-photo">
       <img
         ngSrc="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=900&q=80"
         width="900"
-        height="700"
+        height="600"
         loading="lazy"
         alt="Community members meeting and sharing ideas"
       />
-      <figcaption><span>Ideas grow together</span><small>Demo photo</small></figcaption>
+      <figcaption>Ideas grow together</figcaption>
     </figure>
   </div>
-  <p class="work-photo-note">Illustrative stock photos — replace with RRNGO photos and obtain consent before publishing.</p>
 </section>
 
-<section class="together-section" aria-labelledby="together-title">
-  <div class="together-photo">
+<!-- ═══════════════════════════════════════════════
+     FOUNDER MESSAGE
+═══════════════════════════════════════════════ -->
+<section class="hh-founder" aria-labelledby="founder-title">
+  <div class="hh-founder__logo">
     <img
-      ngSrc="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1400&q=85"
-      width="1400"
-      height="1000"
+      ngSrc="/rr-trust-logo.jpeg"
+      width="762"
+      height="617"
       loading="lazy"
-      alt="People joining hands as they work together"
+      alt="RR Trust and Foundation"
     />
-    <span>Progress is a shared effort.</span>
   </div>
-  <div class="together-copy">
-    <p class="eyebrow">Be part of the change</p>
-    <h2 id="together-title">Bring what you can. Help build what matters.</h2>
-    <p>
-      Bring your time, ideas, skills, or support. We can make a bigger difference when we stand alongside
-      one another.
-    </p>
-    <div class="hero-actions">
-      <a class="button" routerLink="/contact">Volunteer or partner <span aria-hidden="true">↗</span></a>
-      <a class="text-link" routerLink="/donate">Explore ways to give <span aria-hidden="true">↗</span></a>
+  <div class="hh-founder__copy">
+    <span class="hh-eyebrow">A message from our founder</span>
+    <h2 id="founder-title">
+      "Real change begins when we listen to one another and make space for communities to lead."
+    </h2>
+    <p class="hh-founder__name">[Founder name]</p>
+    <p class="hh-founder__note">Replace with the founder's approved words and name before publishing.</p>
+    <a class="hh-text-link" routerLink="/about">
+      Our full story
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     DONATE CTA BAND
+═══════════════════════════════════════════════ -->
+<section class="hh-cta" aria-labelledby="cta-title">
+  <div class="hh-cta__body">
+    <span class="hh-eyebrow hh-eyebrow--gold">Be part of the change</span>
+    <h2 id="cta-title">Bring what you can.<br/>Help build what matters.</h2>
+    <p>Time, skills, resources — every act of generosity creates real change.</p>
+    <div class="hh-cta__actions">
+      <a class="hh-btn hh-btn--gold" routerLink="/donate">
+        Donate now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+      </a>
+      <a class="hh-btn hh-btn--outline" routerLink="/contact">Volunteer with us</a>
+    </div>
+  </div>
+  <div class="hh-cta__causes" aria-label="Causes we support">
+    <div class="hh-cta__cause">
+      <span aria-hidden="true">📚</span>
+      <strong>Education</strong>
+    </div>
+    <div class="hh-cta__cause">
+      <span aria-hidden="true">🏥</span>
+      <strong>Healthcare</strong>
+    </div>
+    <div class="hh-cta__cause">
+      <span aria-hidden="true">👩‍💼</span>
+      <strong>Women</strong>
+    </div>
+    <div class="hh-cta__cause">
+      <span aria-hidden="true">🍱</span>
+      <strong>Child Hunger</strong>
     </div>
   </div>
 </section>
 
-<section class="values-strip" aria-label="Our values">
-  <p><span aria-hidden="true">✳</span> Listen with respect</p>
-  <p><span aria-hidden="true">✳</span> Act with care</p>
-  <p><span aria-hidden="true">✳</span> Grow together</p>
-</section>
+<!-- ═══════════════════════════════════════════════
+     VALUES STRIP
+═══════════════════════════════════════════════ -->
+<div class="hh-values" aria-label="Our values">
+  <span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Listen with respect
+  </span>
+  <span class="hh-values__dot" aria-hidden="true">·</span>
+  <span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Act with care
+  </span>
+  <span class="hh-values__dot" aria-hidden="true">·</span>
+  <span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Grow together
+  </span>
+  <span class="hh-values__dot" aria-hidden="true">·</span>
+  <span>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    Build trust always
+  </span>
+</div>

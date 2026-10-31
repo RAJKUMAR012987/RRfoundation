@@ -17,9 +17,17 @@ describe('Gallery', () => {
     fixture = TestBed.createComponent(Gallery);
     component = fixture.componentInstance;
     await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('shows the projects page with four project cards', () => {
+    const element = fixture.nativeElement as HTMLElement;
+
+    expect(element.querySelector('#projects-title')?.textContent).toContain('Projects shaped');
+    expect(element.querySelectorAll('.project-card')).toHaveLength(4);
   });
 });

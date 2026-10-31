@@ -1,17 +1,18 @@
 :root {
   color-scheme: light;
-  --paper: #fffefa;
-  --ink: #242820;
-  --muted: #5b6258;
-  --wine: #245740;
-  --saffron: #ffcf36;
-  --sage: #285b43;
-  --soft-sage: #eaf0e5;
-  --line: #e5e2d7;
+  --paper: #fafaf9;
+  --ink: #1a1a1a;
+  --muted: #6b7280;
+  --primary: #1c3d2e;
+  --primary-dark: #0f291f;
+  --accent: #2d4a3f;
+  --soft-accent: #f0f4f2;
+  --line: #e5e7eb;
   --surface: #ffffff;
-  --card-radius: 1.15rem;
-  --shadow-card: 0 0.75rem 2rem rgba(35, 54, 46, 0.08);
-  font-family: "Segoe UI", Arial, sans-serif;
+  --card-radius: 0.75rem;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,12 +24,10 @@
 }
 
 html {
-  min-width: 320px;
   scroll-behavior: auto;
 }
 
 body {
-  min-width: 320px;
   margin: 0;
   background: var(--paper);
   color: var(--ink);
@@ -57,10 +56,10 @@ a {
 
 .eyebrow {
   margin: 0;
-  color: var(--wine);
-  font-size: 0.73rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -72,11 +71,11 @@ a {
 
 .section-heading h2 {
   margin: 0.75rem 0;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(2rem, 4vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .section-heading > p:last-child {
@@ -219,10 +218,11 @@ a {
 }
 
 .founder-mark {
-  color: #ad3f32;
-  font-family: Georgia, serif;
+  color: var(--primary);
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(4rem, 8vw, 6.5rem);
   line-height: 0.85;
+  font-weight: 300;
 }
 
 .founder-message {
@@ -232,11 +232,11 @@ a {
 .founder-message h2 {
   margin: 0.75rem 0 1.4rem;
   color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(1.8rem, 4vw, 3.3rem);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .founder-name {
@@ -303,8 +303,9 @@ a {
 }
 
 .work-photo-grid figcaption span {
-  font-family: Georgia, serif;
-  font-size: 1.2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
 .work-photo-grid figcaption small {
@@ -317,8 +318,9 @@ a {
   margin: 1rem auto 0;
   color: var(--muted);
   font-size: 0.78rem;
-  line-height: 1.6;
+  line-height: 1.4;
   text-align: center;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .hero-promise {
@@ -326,8 +328,9 @@ a {
   align-items: center;
   gap: 0.55rem;
   margin: 1.5rem 0 0;
-  color: var(--muted);
+  color: #786c3b;
   font-size: 0.8rem;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .hero-promise span {
@@ -336,9 +339,10 @@ a {
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-  background: var(--soft-sage);
-  color: var(--wine);
+  background: #f7f7f7;
+  color: #754975;
   font-weight: 700;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .hero-photo-note {
@@ -351,8 +355,9 @@ a {
   padding: 1rem 1.2rem;
   border: 1px solid rgba(40, 87, 68, 0.1);
   border-radius: 0.8rem;
-  background: var(--surface);
+  background: #f2f2f2;
   box-shadow: var(--shadow-card);
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .photo-note-icon {
@@ -361,19 +366,20 @@ a {
   aspect-ratio: 1;
   place-items: center;
   border-radius: 50%;
-  background: #f8e9da;
-  color: #a75237;
+  background: #ffd7be;
+  color: #754975;
 }
 
 .hero-photo-note p {
   margin: 0;
-  color: var(--muted);
+  color: #786c3b;
   font-size: 0.82rem;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 .hero-photo-note strong {
-  color: var(--ink);
+  color: #754975;
 }
 
 .home-hero .hero-visual::before {
@@ -383,19 +389,19 @@ a {
   width: 45%;
   height: 45%;
   border-radius: 50%;
-  background: #ffcf36;
+  background: #f7d2c4;
   content: "";
 }
 
 .home-hero .hero-actions .button:not(.button-light) {
-  border-color: #ffcf36;
-  background: #ffcf36;
-  color: #242820;
+  border-color: #ffd7be;
+  background: #f7d2c4;
+  color: #754975;
 }
 
 .home-hero .hero-actions .button:not(.button-light):hover {
-  border-color: #f2bd18;
-  background: #f2bd18;
+  border-color: #ffd7be;
+  background: #ffd7be;
 }
 
 .approach-section {
@@ -417,21 +423,24 @@ a {
 }
 
 .step-number {
-  color: #ad3f32;
-  font-family: Georgia, serif;
+  color: #754975;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 1.15rem;
+  font-weight: 700;
 }
 
 .approach-steps h3 {
   margin: 0 0 0.45rem;
-  font-family: Georgia, serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 1.35rem;
-  font-weight: 400;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
 }
 
 .approach-steps p {
   margin: 0;
-  color: var(--muted);
+  color: #786c3b;
   font-size: 0.9rem;
   line-height: 1.7;
 }
@@ -486,12 +495,13 @@ a {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 0.35rem 1.5rem;
-  min-height: 2.25rem;
-  padding: 0.35rem clamp(1.25rem, 5vw, 5.5rem) 0.35rem clamp(11rem, 16vw, 13rem);
+  gap: 1rem 3rem;
+  min-height: 4rem;
+  padding: 20px clamp(1.25rem, 5vw, 5.5rem) 20px clamp(11rem, 16vw, 13rem);
   background: #20221f;
   color: #f8f7f2;
-  font-size: 0.72rem;
+  font-size: 18px;
+  font-weight: 500;
   letter-spacing: 0.02em;
 }
 
@@ -499,7 +509,7 @@ a {
 .utility-links {
   display: flex;
   align-items: center;
-  gap: 0.4rem 1rem;
+  gap: 1rem 2rem;
 }
 
 .utility-contact {
@@ -509,18 +519,19 @@ a {
 .utility-detail {
   display: inline-flex;
   align-items: baseline;
-  gap: 0.3rem;
+  gap: 0.5rem;
   color: #e8e6de;
   white-space: nowrap;
+  font-size: 17px;
 }
 
 .utility-detail > span {
   color: #c2c1b9;
-  font-size: 0.65rem;
+  font-size: 16px;
 }
 
 .utility-detail strong {
-  font-size: 0.68rem;
+  font-size: 17px;
   font-weight: 600;
 }
 

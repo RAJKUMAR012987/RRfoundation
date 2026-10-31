@@ -1,0 +1,325 @@
+<main class="admin-page">
+  <div class="admin-shell">
+    @if (!configured) {
+      <section class="admin-message" aria-labelledby="admin-config-title">
+        <p class="admin-eyebrow">Private workspace</p>
+        <h1 id="admin-config-title">Admin dashboard setup required</h1>
+        <p>
+          Set the Supabase project URL and publishable key in
+          <code>src/environments/environment.ts</code>, then apply the SQL migration in
+          <code>supabase/migrations</code>.
+        </p>
+      </section>
+    } @else if (loading()) {
+      <p class="admin-loading" role="status">Loading dashboard…</p>
+    } @else if (!authenticated()) {
+      <section class="admin-login" aria-labelledby="admin-login-title">
+        <a class="admin-brand" routerLink="/home" aria-label="RRNGO home">
+          <img ngSrc="/rr-trust-logo.jpeg" width="762" height="617" alt="" />
+        </a>
+        <p class="admin-eyebrow">Private workspace</p>
+        <h1 id="admin-login-title">Admin sign in</h1>
+        <p class="admin-login__intro">Sign in with an approved RR Trust administrator account.</p>
+
+        @if (error()) {
+          <div class="admin-alert admin-alert--error" role="alert">{{ error() }}</div>
+        }
+        @if (notice()) {
+          <div class="admin-alert admin-alert--success" role="status">{{ notice() }}</div>
+        }
+
+        <form class="admin-login__form" (ngSubmit)="signIn()">
+          <label for="admin-email">Email address</label>
+          <input
+            id="admin-email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            [(ngModel)]="email"
+            required
+          />
+          <label for="admin-password">Password</label>
+          <input
+            id="admin-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            [(ngModel)]="password"
+            required
+          />
+          <button class="admin-button admin-button--primary" type="submit" [disabled]="loading()">
+            Sign in securely
+          </button>
+        </form>
+        <a class="admin-back-link" routerLink="/home">← Back to the website</a>
+      </section>
+    } @else {
+      <header class="admin-header">
+        <div>
+          <p class="admin-eyebrow">RR Trust &amp; Foundation</p>
+          <h1>Admin dashboard</h1>
+        </div>
+        <div class="admin-header__actions">
+          <button class="admin-button admin-button--quiet" type="button" (click)="refresh()">
+            Refresh
+          </button>
+          <button class="admin-button admin-button--quiet" type="button" (click)="signOut()">
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      @if (error()) {
+        <div class="admin-alert admin-alert--error" role="alert">{{ error() }}</div>
+      }
+      @if (notice()) {
+        <div class="admin-alert admin-alert--success" role="status">{{ notice() }}</div>
+      }
+
+      <section class="admin-overview" aria-label="Dashboard overview">
+        <article class="admin-stat">
+          <span>Verified donations</span>
+          <strong>{{ payments().length }}</strong>
+          <small>Latest 100 recorded payments</small>
+        </article>
+        <article class="admin-stat">
+          <span>Captured total</span>
+          <strong>{{ (successfulTotal / 100) | currency:'INR':'symbol':'1.0-0' }}</strong>
+          <small>Captured payments verified by Razorpay</small>
+        </article>
+        <article class="admin-stat">
+          <span>Published content</span>
+          <strong>{{ publishedCount }}</strong>
+          <small>Photos, videos, and quotes</small>
+        </article>
+        <article class="admin-stat admin-stat--highlight">
+          <span>Content drafts</span>
+          <strong>{{ draftCount }}</strong>
+          <small>Review before publishing</small>
+        </article>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="home-belief-title">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">Home page</p>
+            <h2 id="home-belief-title">Our belief section</h2>
+          </div>
+        </div>
+        <form class="admin-form-grid admin-belief-form" (ngSubmit)="saveHomeBelief()">
+          <label>
+            Eyebrow
+            <input name="beliefEyebrow" [(ngModel)]="homeBelief.eyebrow" maxlength="80" required />
+          </label>
+          <label>
+            Heading
+            <textarea name="beliefHeading" [(ngModel)]="homeBelief.heading" rows="2" maxlength="240" required></textarea>
+          </label>
+          <label>
+            Description
+            <textarea name="beliefBody" [(ngModel)]="homeBelief.body" rows="4" maxlength="1200" required></textarea>
+          </label>
+          <label>
+            Link label
+            <input name="beliefLinkLabel" [(ngModel)]="homeBelief.link_label" maxlength="100" required />
+          </label>
+          <label>
+            Link path <span>(must be a local path, e.g. /about)</span>
+            <input name="beliefLinkUrl" [(ngModel)]="homeBelief.link_url" maxlength="300" required />
+          </label>
+          <button class="admin-button admin-button--primary" type="submit" [disabled]="savingBelief()">
+            {{ savingBelief() ? 'Saving…' : 'Save Home section' }}
+          </button>
+        </form>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="content-create-title">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">Projects page</p>
+            <h2 id="content-create-title">Add a photo, video, or quote</h2>
+          </div>
+          <span class="admin-draft-label">New items start as drafts</span>
+        </div>
+        <p class="admin-panel__note">
+          To show a video on the Home page, add it here and publish it below. The newest published video
+          plays muted on repeat as the Home hero background. Unpublish it to return to the default image.
+        </p>
+
+        <form class="admin-content-form" (ngSubmit)="saveContent()">
+          <fieldset class="admin-kind-picker">
+            <legend>Content type</legend>
+            <label>
+              <input
+                type="radio"
+                name="contentKind"
+                value="photo"
+                [checked]="contentKind() === 'photo'"
+                (change)="setKind('photo')"
+              />
+              Photo
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="contentKind"
+                value="video"
+                [checked]="contentKind() === 'video'"
+                (change)="setKind('video')"
+              />
+              Video
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="contentKind"
+                value="quote"
+                [checked]="contentKind() === 'quote'"
+                (change)="setKind('quote')"
+              />
+              Quote
+            </label>
+          </fieldset>
+
+          <div class="admin-form-grid">
+            <label>
+              Title
+              <input name="title" [(ngModel)]="title" maxlength="160" required />
+            </label>
+            <label>
+              Caption or context <span>(optional)</span>
+              <textarea name="description" [(ngModel)]="description" rows="3" maxlength="2000"></textarea>
+            </label>
+            @if (contentKind() === 'quote') {
+              <label>
+                Quote text
+                <textarea name="quote" [(ngModel)]="quote" rows="4" maxlength="2000" required></textarea>
+              </label>
+            } @else {
+              <label>
+                {{ contentKind() === 'photo' ? 'Photo' : 'Video' }} file
+                <input
+                  type="file"
+                  name="media"
+                  [accept]="contentKind() === 'photo' ? 'image/jpeg,image/png,image/webp' : 'video/mp4,video/webm'"
+                  (change)="chooseFile($event)"
+                  required
+                />
+                <span class="admin-field-hint">
+                  {{ contentKind() === 'photo' ? 'JPEG, PNG, or WebP' : 'MP4 or WebM' }} · Up to 50 MB
+                </span>
+              </label>
+              @if (selectedFile()) {
+                <p class="admin-file-name" aria-live="polite">{{ selectedFile()?.name }}</p>
+              }
+            }
+          </div>
+          <button class="admin-button admin-button--primary" type="submit" [disabled]="saving()">
+            {{ saving() ? 'Saving…' : 'Save as draft' }}
+          </button>
+        </form>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="content-list-title">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">Content management</p>
+            <h2 id="content-list-title">Photos, videos, and quotes</h2>
+          </div>
+          <span class="admin-count">{{ content().length }} items</span>
+        </div>
+
+        @if (content().length === 0) {
+          <p class="admin-empty">No content yet. New additions will appear here as drafts.</p>
+        } @else {
+          <div class="admin-content-list">
+            @for (item of content(); track item.id) {
+              <article class="admin-content-item">
+                <div class="admin-content-item__preview">
+                  @if (item.kind === 'photo' && item.media_url) {
+                    <img [src]="item.media_url" [alt]="item.title" />
+                  } @else if (item.kind === 'video' && item.media_url) {
+                    <video [src]="item.media_url" controls preload="metadata" [attr.aria-label]="item.title"></video>
+                  } @else {
+                    <span aria-hidden="true">“</span>
+                  }
+                </div>
+                <div class="admin-content-item__info">
+                  <span class="admin-type-label">{{ item.kind }}</span>
+                  <h3>{{ item.title }}</h3>
+                  @if (item.kind === 'quote') {
+                    <p>{{ item.quote }}</p>
+                  } @else if (item.description) {
+                    <p>{{ item.description }}</p>
+                  }
+                  <span class="admin-content-item__status" [class.is-published]="item.published">
+                    {{ item.published ? 'Published' : 'Draft' }}
+                  </span>
+                </div>
+                <div class="admin-content-item__actions">
+                  <button class="admin-button admin-button--quiet" type="button" (click)="togglePublished(item)">
+                    {{ item.published ? 'Unpublish' : 'Publish' }}
+                  </button>
+                  <button class="admin-button admin-button--danger" type="button" (click)="deleteItem(item)">
+                    Delete
+                  </button>
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="admin-panel" aria-labelledby="payments-title">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">Razorpay</p>
+            <h2 id="payments-title">Verified payment details</h2>
+          </div>
+          <span class="admin-count">{{ payments().length }} records</span>
+        </div>
+        <p class="admin-panel__note">
+          Payment records are written only after server-side Razorpay verification. Donor PAN and phone
+          numbers are not stored in this dashboard.
+        </p>
+
+        @if (payments().length === 0) {
+          <p class="admin-empty">
+            No captured payments recorded yet. Configure the Razorpay webhook and refresh after a
+            test payment.
+          </p>
+        } @else {
+          <div class="admin-table-wrap">
+            <table class="admin-payments">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Payment ID</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Cause</th>
+                  <th scope="col">Method</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Donor email</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (payment of payments(); track payment.payment_id) {
+                  <tr>
+                    <td>{{ payment.paid_at | date:'medium' }}</td>
+                    <td><code>{{ payment.payment_id }}</code></td>
+                    <td>{{ (payment.amount / 100) | currency:payment.currency:'symbol':'1.0-2' }}</td>
+                    <td>{{ payment.category || '—' }}</td>
+                    <td>{{ payment.method || '—' }}</td>
+                    <td><span class="payment-status" [class.is-captured]="payment.status === 'captured'">{{ payment.status }}</span></td>
+                    <td>{{ payment.donor_email || 'Anonymous' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </section>
+    }
+
+  </div>
+</main>

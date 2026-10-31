@@ -1,68 +1,188 @@
-<section class="gallery-intro" aria-labelledby="gallery-title">
-  <p class="eyebrow">People &amp; moments</p>
-  <h1 id="gallery-title">A shared effort, seen up close.</h1>
-  <p>Every photograph is a reminder that change is made of people, small acts, and moments of connection.</p>
-</section>
-
-<section class="story-gallery" aria-label="Community moments">
-  <figure class="gallery-item gallery-tall">
+<section class="projects-hero" aria-labelledby="projects-title">
+  <div class="projects-hero__bg" aria-hidden="true">
     <img
-      ngSrc="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1100&q=85"
-      width="1100"
-      height="1400"
+      ngSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=85"
+      fill
       priority
-      alt="Children taking part in a learning activity"
+      alt=""
     />
-    <figcaption><span>Curiosity opens doors</span><small>Learning together</small></figcaption>
-  </figure>
-  <figure class="gallery-item">
-    <img
-      ngSrc="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1100&q=85"
-      width="1100"
-      height="800"
-      loading="lazy"
-      alt="A group of people sharing a conversation"
-    />
-    <figcaption><span>Better, together</span><small>Neighbours and partners</small></figcaption>
-  </figure>
-  <figure class="gallery-item">
-    <img
-      ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1100&q=85"
-      width="1100"
-      height="800"
-      loading="lazy"
-      alt="Volunteers gathering supplies to help others"
-    />
-    <figcaption><span>Care in action</span><small>Showing up for one another</small></figcaption>
-  </figure>
-  <figure class="gallery-item">
-    <img
-      ngSrc="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1100&q=85"
-      width="1100"
-      height="800"
-      loading="lazy"
-      alt="Volunteers working together at a community event"
-    />
-    <figcaption><span>Many hands, shared purpose</span><small>Working side by side</small></figcaption>
-  </figure>
-  <figure class="gallery-item">
-    <img
-      ngSrc="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1100&q=85"
-      width="1100"
-      height="800"
-      loading="lazy"
-      alt="Young people taking part in a group activity"
-    />
-    <figcaption><span>Room to grow</span><small>Skills and confidence</small></figcaption>
-  </figure>
+    <div class="projects-hero__overlay"></div>
+  </div>
+  <div class="projects-hero__content">
+    <span class="projects-pill">Community-led initiatives</span>
+    <h1 id="projects-title">Projects shaped<br />by people.</h1>
+    <p>
+      Explore the kinds of community projects we support across learning, health,
+      livelihoods, and nutrition.
+    </p>
+    <a class="projects-button" href="#featured-projects">
+      Explore projects
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+  </div>
 </section>
 
-<p class="gallery-note">
-  These photos are illustrative. Replace them with RRNGO’s own stories and images—with permission from the people pictured.
-</p>
+<section id="featured-projects" class="projects-section" aria-labelledby="featured-projects-title">
+  <div class="projects-section__head">
+    <span class="projects-eyebrow">From learning to wellbeing</span>
+    <h2 id="featured-projects-title">A closer look at our work.</h2>
+    <p>
+      Each project starts by listening to local priorities and building practical,
+      community-led responses together.
+    </p>
+  </div>
 
-<section class="page-cta" aria-labelledby="gallery-cta-title">
-  <p class="eyebrow">Your story can be part of it</p>
-  <h2 id="gallery-cta-title">Help create the next moment of connection.</h2>
-  <a class="button" routerLink="/donate">Ways to contribute <span aria-hidden="true">↗</span></a>
+  <div class="projects-grid">
+    <article class="project-card">
+      <div class="project-card__image">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1000&q=85"
+          width="1000"
+          height="700"
+          loading="lazy"
+          alt="Children learning together in a classroom"
+        />
+        <span class="project-card__number" aria-hidden="true">01</span>
+      </div>
+      <div class="project-card__body">
+        <span class="project-card__category">Education</span>
+        <h3>Community Learning Circles</h3>
+        <p>
+          Welcoming spaces where children can build foundational skills, get learning
+          support, and grow their confidence.
+        </p>
+        <a routerLink="/services" fragment="programmes" class="project-card__link">
+          Explore education
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-card__image">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85"
+          width="1000"
+          height="700"
+          loading="lazy"
+          alt="A healthcare worker speaking with a community member"
+        />
+        <span class="project-card__number" aria-hidden="true">02</span>
+      </div>
+      <div class="project-card__body">
+        <span class="project-card__category">Healthcare</span>
+        <h3>Neighbourhood Health Days</h3>
+        <p>
+          Accessible health check-ups and practical wellbeing information, delivered
+          in partnership with local health workers.
+        </p>
+        <a routerLink="/services" fragment="programmes" class="project-card__link">
+          Explore healthcare
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-card__image">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1000&q=85"
+          width="1000"
+          height="700"
+          loading="lazy"
+          alt="Community members working together at a programme"
+        />
+        <span class="project-card__number" aria-hidden="true">03</span>
+      </div>
+      <div class="project-card__body">
+        <span class="project-card__category">Women’s empowerment</span>
+        <h3>Skills for Independent Futures</h3>
+        <p>
+          Skills-building and peer support that help women explore livelihood
+          opportunities and make plans on their own terms.
+        </p>
+        <a routerLink="/services" fragment="programmes" class="project-card__link">
+          Explore livelihoods
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card">
+      <div class="project-card__image">
+        <img
+          ngSrc="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=85"
+          width="1000"
+          height="700"
+          loading="lazy"
+          alt="Children sharing a meal"
+        />
+        <span class="project-card__number" aria-hidden="true">04</span>
+      </div>
+      <div class="project-card__body">
+        <span class="project-card__category">Child nutrition</span>
+        <h3>Nourish and Grow</h3>
+        <p>
+          Community-led nutrition support that helps children access nourishing food
+          and builds awareness around healthy meals.
+        </p>
+        <a routerLink="/services" fragment="programmes" class="project-card__link">
+          Explore nutrition
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </article>
+  </div>
+
+  @if (contentConfigured) {
+    <section class="community-updates" aria-labelledby="community-updates-title">
+      <div class="projects-section__head">
+        <span class="projects-eyebrow">From the community</span>
+        <h2 id="community-updates-title">Updates from our projects.</h2>
+      </div>
+      @if (communityContentLoading()) {
+        <p class="projects-status" role="status">Loading community updates…</p>
+      } @else if (communityContentError()) {
+        <p class="projects-status projects-status--error" role="alert">{{ communityContentError() }}</p>
+      } @else if (communityContent().length === 0) {
+        <p class="projects-status">New project photos, videos, and quotes will appear here.</p>
+      } @else {
+        <div class="community-updates__grid">
+          @for (item of communityContent(); track item.id) {
+            <article class="community-card">
+              @if (item.kind === 'photo' && item.media_url) {
+                <img [src]="item.media_url" [alt]="item.title" loading="lazy" />
+              } @else if (item.kind === 'video' && item.media_url) {
+                <video [src]="item.media_url" controls preload="metadata" [attr.aria-label]="item.title"></video>
+              } @else if (item.kind === 'quote') {
+                <blockquote>{{ item.quote }}</blockquote>
+              }
+              <div class="community-card__body">
+                <span class="projects-eyebrow">{{ item.kind }}</span>
+                <h3>{{ item.title }}</h3>
+                @if (item.description) {
+                  <p>{{ item.description }}</p>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+  }
+
+  <p class="projects-note">
+    These are illustrative project examples. Replace the descriptions and photos with
+    verified RR Trust &amp; Foundation project details and images before publishing.
+  </p>
+</section>
+
+<section class="projects-cta" aria-labelledby="projects-cta-title">
+  <span class="projects-eyebrow projects-eyebrow--light">Make the next project possible</span>
+  <h2 id="projects-cta-title">Communities move forward when we move together.</h2>
+  <p>Bring your time, skills, or support to work shaped by local priorities.</p>
+  <div class="projects-cta__actions">
+    <a class="projects-button projects-button--gold" routerLink="/contact">Get involved</a>
+    <a class="projects-button projects-button--outline" routerLink="/donate">Support a project</a>
+  </div>
 </section>

@@ -4,15 +4,13 @@
   <div class="utility-contact" aria-label="Contact placeholders">
     <a href="mailto:hello@example.org">hello@example.org</a>
     <a href="tel:+910000000000">+91 00000 00000</a>
-    <span class="utility-detail"><span>Reg. No.</span> <strong>REG-ABCD-1234</strong></span>
-    <span class="utility-detail"><span>PAN</span> <strong>PAN-ABCD-1234</strong></span>
   </div>
   <div class="utility-links">
-    <a routerLink="/contact">Volunteer <span aria-hidden="true">↗</span></a>
+    <a routerLink="/contact">Volunteer <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
     <a href="https://www.facebook.com/your-page" target="_blank" rel="noopener noreferrer">Facebook</a>
     <a href="https://www.instagram.com/your-page" target="_blank" rel="noopener noreferrer">Instagram</a>
   </div>
-  <span class="utility-placeholder-note">Sample contact and legal details, and social links — replace before publishing</span>
+  <span class="utility-placeholder-note">Sample contact details and social links — replace before publishing</span>
 </div>
 
 <header class="site-header">
@@ -26,6 +24,7 @@
       alt="RR Trust and Foundation"
     />
   </a>
+  <span class="header-reg-number">Reg. No. <strong>REG-ABCD-1234</strong></span>
 
   <button
     class="menu-toggle"
@@ -46,13 +45,16 @@
     <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
     <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page">Our story</a>
     <a routerLink="/services" routerLinkActive="active" ariaCurrentWhenActive="page">Our work</a>
-    <a routerLink="/gallery" routerLinkActive="active" ariaCurrentWhenActive="page">Stories</a>
+    <a routerLink="/gallery" routerLinkActive="active" ariaCurrentWhenActive="page">Projects</a>
     <a routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page">Contact</a>
   </nav>
 
-  <a class="button button-small header-cta" routerLink="/donate">
-    Donate now <span aria-hidden="true">↗</span>
-  </a>
+  <div class="header-donate-group">
+    <a class="button button-small header-cta" routerLink="/donate">
+      Donate now <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+    </a>
+    <span class="header-pan"><span>PAN:</span> <strong>PAN-ABCD-1234</strong></span>
+  </div>
 </header>
 
 @if (donationDetailsOpen()) {
@@ -86,7 +88,7 @@
           communities and support work shaped by their voices.
         </p>
         <a class="button dialog-donate" routerLink="/donate" (click)="closeDonationDetails()">
-          Donate now <span aria-hidden="true">↗</span>
+          Donate now <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
         </a>
       </div>
     </section>
@@ -97,36 +99,143 @@
   <router-outlet />
 </main>
 
-<footer class="site-footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a class="site-brand" routerLink="/home" aria-label="RRNGO home">
-        <img
-          class="brand-logo footer-logo"
-          ngSrc="/rr-trust-logo.jpeg"
-          width="762"
-          height="617"
-          loading="lazy"
-          alt="RR Trust and Foundation — Together for a Better Tomorrow"
-        />
-      </a>
-      <p>Standing alongside communities as they shape a more caring, resilient future.</p>
-    </div>
-    <div class="footer-links">
-      <h2>Explore</h2>
-      <a routerLink="/about">Our story</a>
-      <a routerLink="/services">Our work</a>
-      <a routerLink="/gallery">Stories</a>
-      <a routerLink="/contact">Contact</a>
-    </div>
-    <div class="footer-invite">
-      <p class="eyebrow">People-powered change</p>
-      <h2>There is a place for you in this work.</h2>
-      <a class="text-link" routerLink="/contact">Volunteer or partner with us <span aria-hidden="true">↗</span></a>
+<footer class="sf-footer" aria-label="Site footer">
+
+  <!-- Top CTA band -->
+  <div class="sf-cta-band">
+    <div class="sf-cta-band__inner">
+      <div class="sf-cta-band__copy">
+        <span class="sf-cta-band__eyebrow">Ready to make a difference?</span>
+        <h2 class="sf-cta-band__title">Every rupee creates real change.</h2>
+      </div>
+      <div class="sf-cta-band__actions">
+        <a class="sf-cta-btn sf-cta-btn--gold" routerLink="/donate">
+          Donate now
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+        <a class="sf-cta-btn sf-cta-btn--outline" routerLink="/contact">Get involved</a>
+      </div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2026 RRNGO. All rights reserved.</span>
-    <span>Made for people, with people.</span>
+
+  <!-- Main footer body -->
+  <div class="sf-body">
+    <div class="sf-body__inner">
+
+      <!-- Brand column -->
+      <div class="sf-col sf-col--brand">
+        <a routerLink="/home" class="sf-logo-wrap" aria-label="RRNGO — go to homepage">
+          <img
+            class="sf-logo"
+            ngSrc="/rr-trust-logo.jpeg"
+            width="762"
+            height="617"
+            loading="lazy"
+            alt="RR Trust and Foundation"
+          />
+        </a>
+        <p class="sf-tagline">Standing alongside communities as they shape a more caring, resilient future.</p>
+
+        <!-- Social links -->
+        <div class="sf-social" aria-label="Follow us">
+          <a href="https://www.facebook.com/your-page" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="sf-social__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/your-page" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="sf-social__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.twitter.com/your-page" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" class="sf-social__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/your-page" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="sf-social__link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Nav column -->
+      <nav class="sf-col sf-col--nav" aria-label="Footer navigation">
+        <h3 class="sf-col__title">Navigate</h3>
+        <ul class="sf-nav-list">
+          <li><a routerLink="/home">Home</a></li>
+          <li><a routerLink="/about">Our story</a></li>
+          <li><a routerLink="/services">Our work</a></li>
+          <li><a routerLink="/gallery">Projects</a></li>
+          <li><a routerLink="/contact">Contact us</a></li>
+          <li><a routerLink="/donate">Donate</a></li>
+        </ul>
+      </nav>
+
+      <!-- Causes column -->
+      <div class="sf-col sf-col--causes">
+        <h3 class="sf-col__title">Our Causes</h3>
+        <ul class="sf-nav-list">
+          <li>
+            <a routerLink="/donate">
+              <span aria-hidden="true">📚</span> Education
+            </a>
+          </li>
+          <li>
+            <a routerLink="/donate">
+              <span aria-hidden="true">🏥</span> Healthcare
+            </a>
+          </li>
+          <li>
+            <a routerLink="/donate">
+              <span aria-hidden="true">👩‍💼</span> Women Empowerment
+            </a>
+          </li>
+          <li>
+            <a routerLink="/donate">
+              <span aria-hidden="true">🍱</span> Child Hunger
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact + Legal column -->
+      <div class="sf-col sf-col--contact">
+        <h3 class="sf-col__title">Contact &amp; Legal</h3>
+        <ul class="sf-contact-list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:hello@example.org">hello@example.org</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.62 4.38 2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+910000000000">+91 00000 00000</a>
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Tamil Nadu, India</span>
+          </li>
+        </ul>
+
+        <div class="sf-legal-chips">
+          <span class="sf-legal-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            80G Tax Exempt
+          </span>
+          <span class="sf-legal-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Reg. NGO
+          </span>
+        </div>
+
+        <div class="sf-reg-details">
+          <p><span>PAN</span> <strong>PAN-ABCD-1234</strong></p>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- Bottom bar -->
+  <div class="sf-bottom">
+    <div class="sf-bottom__inner">
+      <p class="sf-bottom__copy">© 2026 RRNGO – RR Trust &amp; Foundation. All rights reserved.</p>
+      <p class="sf-bottom__made">Made with care, for communities.</p>
+    </div>
+  </div>
+
 </footer>

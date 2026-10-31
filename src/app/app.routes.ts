@@ -26,4 +26,8 @@ export const routes: Routes = [
     path: 'donate',
     loadComponent: () => import('./pages/donate/donate').then((module) => module.Donate),
   },
+  {
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin').then((module) => module.Admin),
+  },
 ];
