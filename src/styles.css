@@ -583,6 +583,22 @@ a {
 }
 
 @media (max-width: 58rem) {
+  .utility-bar {
+    gap: 0.45rem 1rem;
+    min-height: 0;
+    padding: 0.5rem 1rem 0.5rem 7rem;
+    font-size: 0.78rem;
+  }
+
+  .utility-contact,
+  .utility-links {
+    gap: 0.45rem 1rem;
+  }
+
+  .utility-placeholder-note {
+    display: none;
+  }
+
   .site-header nav {
     position: absolute;
     top: 100%;
@@ -635,23 +651,32 @@ a {
 
 @media (max-width: 38rem) {
   .utility-bar {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 0.35rem;
-    padding: 0.5rem 0.65rem 0.35rem;
-    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-height: 0;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.6rem;
   }
 
-  .utility-contact,
+  .utility-contact {
+    display: grid;
+    gap: 0.15rem;
+    font-size: 0.58rem;
+  }
+
   .utility-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3rem 0.8rem;
+    gap: 0.45rem;
+    font-size: 0.62rem;
+  }
+
+  .utility-links a:not(:first-child) {
+    display: none;
   }
 
   .utility-placeholder-note {
-    grid-column: auto;
-    text-align: center;
+    display: none;
   }
 
   .menu-toggle {

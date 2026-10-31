@@ -11,21 +11,30 @@ storage. Only captured payments verified by the server are shown.
    enabled.
 2. Run `migrations/202610300001_admin_dashboard.sql` in the Supabase SQL editor.
 3. Run `migrations/202610310001_home_belief.sql` to enable editing the Home page belief section.
-4. Create an administrator user in Supabase Auth. Then authorize the account in the SQL editor:
+4. Run `migrations/202611010001_feature_home_video.sql` to enable choosing one published video for
+   the Home hero.
+5. Run `migrations/202611010002_import_bucket_videos.sql` to let admins find and import videos
+   already stored in the `public-media` bucket.
+6. Run `migrations/202611010003_home_founder_section.sql` to enable the Home founder message and
+   photo gallery.
+7. Create an administrator user in Supabase Auth. Then authorize the account in the SQL editor:
 
    ```sql
    insert into public.admin_emails (email)
    values (lower('admin@example.com'));
    ```
 
-5. Disable public sign-ups in Supabase Auth. Create administrator accounts directly in Supabase.
+7. Disable public sign-ups in Supabase Auth. Create administrator accounts directly in Supabase.
 
 The admin email allowlist is empty by default, so no account can access administrative data until
 an email is added.
 
-After applying both migrations, an authorized administrator can edit the Home page's **Our belief**
+After applying the migrations, an authorized administrator can edit the Home page's **Our belief**
 eyebrow, heading, description, and approach link at `/admin`. The published Home page reads this
 content from Supabase; the current copy remains as a fallback if the public content request fails.
+The **Founder message and photos** panel manages the founder's name, message, and up to four photos.
+The photos appear together in one row above the Home page's Our belief section. Uploaded photos use
+the private `public-media` bucket and are served through signed URLs.
 
 ## 2. Configure server-only secrets
 
@@ -104,7 +113,12 @@ and donor email; it does not store PAN or phone numbers.
 ## 4. Publish content
 
 Photos, videos, and quotes uploaded through `/admin` are drafts. Admins can publish them to the
-Projects page or keep them private. The newest published video is also used as the Home page hero
-background and plays muted on a loop; unpublishing it restores the default Home image. Media is
-stored in a private bucket; the app issues signed URLs only for content the visitor or admin is
-permitted to read.
+Projects page or keep them private. Published videos appear in Projects as usual; an administrator
+can separately choose one published video with **Feature on Home** for the Home hero. It plays muted
+on a loop. Removing the selection or unpublishing that video restores the default Home image. Media
+is stored in the `public-media` private bucket; the app issues signed URLs only for content the
+visitor or admin is permitted to read.
+
+Videos uploaded directly to Storage do not appear in Projects until an administrator imports them
+from **Videos in public-media** on the Admin dashboard. Choose **Add to Projects** to publish it in
+Projects, or **Feature on Home** to publish it and immediately use it as the Home hero video.

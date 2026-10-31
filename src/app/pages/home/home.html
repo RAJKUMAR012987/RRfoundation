@@ -191,6 +191,31 @@
   </div>
 </section>
 
+@if (founders().message || founders().photos.length) {
+  <section class="hh-founder" aria-labelledby="founder-title">
+    @if (founders().photos.length) {
+      <div class="hh-founder__photos" aria-label="Founder photos">
+        @for (photo of founders().photos; track photo.path) {
+          <img
+            [src]="photo.url"
+            [alt]="'Photo of ' + founders().name"
+            loading="lazy"
+          />
+        }
+      </div>
+    }
+    @if (founders().message) {
+      <div class="hh-founder__copy">
+        <span class="hh-eyebrow">A message from our founder</span>
+        <h2 id="founder-title">“{{ founders().message }}”</h2>
+        @if (founders().name) {
+          <p class="hh-founder__name">{{ founders().name }}</p>
+        }
+      </div>
+    }
+  </section>
+}
+
 <!-- ═══════════════════════════════════════════════
      MISSION BANNER
 ═══════════════════════════════════════════════ -->
@@ -287,33 +312,6 @@
       />
       <figcaption>Ideas grow together</figcaption>
     </figure>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     FOUNDER MESSAGE
-═══════════════════════════════════════════════ -->
-<section class="hh-founder" aria-labelledby="founder-title">
-  <div class="hh-founder__logo">
-    <img
-      ngSrc="/rr-trust-logo.jpeg"
-      width="762"
-      height="617"
-      loading="lazy"
-      alt="RR Trust and Foundation"
-    />
-  </div>
-  <div class="hh-founder__copy">
-    <span class="hh-eyebrow">A message from our founder</span>
-    <h2 id="founder-title">
-      "Real change begins when we listen to one another and make space for communities to lead."
-    </h2>
-    <p class="hh-founder__name">[Founder name]</p>
-    <p class="hh-founder__note">Replace with the founder's approved words and name before publishing.</p>
-    <a class="hh-text-link" routerLink="/about">
-      Our full story
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
-    </a>
   </div>
 </section>
 

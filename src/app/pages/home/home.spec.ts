@@ -23,14 +23,31 @@ describe('Home', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show a replaceable founder message and clearly labeled demo photos', () => {
+  it('shows the Admin-managed founder message and up to four photos above Our belief', () => {
+    component.founders.set({
+      message: 'We listen and grow together.',
+      name: 'A. Founder',
+      photos: [
+        { path: 'founder-1.jpg', url: '/founder-1.jpg' },
+        { path: 'founder-2.jpg', url: '/founder-2.jpg' },
+        { path: 'founder-3.jpg', url: '/founder-3.jpg' },
+        { path: 'founder-4.jpg', url: '/founder-4.jpg' },
+      ],
+    });
     fixture.detectChanges();
 
     const page = fixture.nativeElement as HTMLElement;
-    expect(page.querySelector('.founder-message')?.textContent).toContain('[Founder name]');
-    expect(page.querySelector('.founder-note')?.textContent).toContain('Sample message');
-    expect(page.querySelectorAll('.work-photo-grid figure')).toHaveLength(3);
-    expect(page.querySelectorAll('.work-photo-grid figcaption small')).toHaveLength(3);
-    expect(page.querySelector('.work-photo-note')?.textContent).toContain('Illustrative stock photos');
+    const founderSection = page.querySelector('.hh-founder');
+    const beliefSection = page.querySelector('.hh-mission');
+    expect(founderSection).not.toBeNull();
+    expect(beliefSection).not.toBeNull();
+    expect(founderSection?.textContent).toContain('We listen and grow together.');
+    expect(founderSection?.textContent).toContain('A. Founder');
+    expect(founderSection?.querySelectorAll('.hh-founder__photos img')).toHaveLength(4);
+    if (founderSection && beliefSection) {
+      expect(
+        founderSection.compareDocumentPosition(beliefSection) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    }
   });
 });

@@ -3,7 +3,7 @@ import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
-const MEDIA_BUCKET = 'my-new-bucket';
+const MEDIA_BUCKET = 'public-media';
 
 export type SiteContentKind = 'photo' | 'video' | 'quote';
 
@@ -16,7 +16,15 @@ export interface SiteContent {
   media_url: string | null;
   media_path: string | null;
   published: boolean;
+  home_featured: boolean;
   created_at: string;
+}
+
+export interface BucketVideo {
+  path: string;
+  name: string;
+  created_at: string | null;
+  size: number | null;
 }
 
 export interface DonationPayment {
@@ -39,6 +47,23 @@ export interface HomeBelief {
   link_url: string;
 }
 
+export interface FounderPhoto {
+  path: string;
+  url: string;
+}
+
+export interface HomeFounders {
+  message: string;
+  name: string;
+  photos: FounderPhoto[];
+}
+
+export const DEFAULT_HOME_FOUNDERS: HomeFounders = {
+  message: '',
+  name: '',
+  photos: [],
+};
+
 export const DEFAULT_HOME_BELIEF: HomeBelief = {
   eyebrow: 'Our belief',
   heading: 'People closest to the challenge belong at the heart of the solution.',
@@ -56,6 +81,17 @@ export function normalizeDonationPayment(payment: DonationPayment): DonationPaym
     amount: legacySuccess ? payment.amount * 100 : payment.amount,
     status: captured ? 'captured' : payment.status,
   };
+}
+
+function isMissingStorageObject(error: unknown): boolean {
+  if (typeof error !== 'object' || error === null) return false;
+  const details = error as Record<string, unknown>;
+  return (
+    details['code'] === 'NoSuchKey' ||
+    (details['statusCode'] === '404' &&
+      typeof details['message'] === 'string' &&
+      details['message'].toLowerCase().includes('object not found'))
+  );
 }
 
 @Injectable({ providedIn: 'root' })
@@ -151,12 +187,112 @@ export class SupabaseService {
     return data as HomeBelief;
   }
 
+  async getHomeFounders(): Promise<HomeFounders> {
+    const { data, error } = await this.client
+      .from('home_founders')
+      .select('message, founder_name, photo_paths')
+      .eq('id', 'home')
+      .single();
+    if (error) throw error;
+
+    const record = data as { message: string; founder_name: string; photo_paths: string[] };
+    const photos = await Promise.all(
+      record.photo_paths.map(async (path): Promise<FounderPhoto | null> => {
+        const { data: signed, error: storageError } = await this.client.storage
+          .from(MEDIA_BUCKET)
+          .createSignedUrl(path, 3600);
+        if (storageError) {
+          if (isMissingStorageObject(storageError)) return null;
+          throw storageError;
+        }
+        return { path, url: signed.signedUrl };
+      }),
+    );
+    return {
+      message: record.message,
+      name: record.founder_name,
+      photos: photos.filter((photo): photo is FounderPhoto => photo !== null),
+    };
+  }
+
+  async updateHomeFounders(input: {
+    message: string;
+    name: string;
+    files: File[];
+    removePhotos: boolean;
+  }): Promise<HomeFounders> {
+    if (input.files.length > 4) throw new Error('Choose no more than four founder photos.');
+    const { data: current, error: readError } = await this.client
+      .from('home_founders')
+      .select('photo_paths')
+      .eq('id', 'home')
+      .single();
+    if (readError) throw readError;
+
+    const previousPaths = (current.photo_paths as string[]) ?? [];
+    const uploadedPaths: string[] = [];
+    let saved = false;
+    try {
+      for (const file of input.files) {
+        const extension = file.name.split('.').pop()?.toLowerCase();
+        if (!extension) throw new Error('Choose a founder photo with a valid file extension.');
+        const path = `founders/${crypto.randomUUID()}.${extension}`;
+        const { error: uploadError } = await this.client.storage
+          .from(MEDIA_BUCKET)
+          .upload(path, file, { contentType: file.type, upsert: false });
+        if (uploadError) throw uploadError;
+        uploadedPaths.push(path);
+      }
+
+      const photoPaths = [
+        ...(input.removePhotos ? [] : previousPaths),
+        ...uploadedPaths,
+      ];
+      if (photoPaths.length > 4) {
+        throw new Error('The Home founder gallery can contain no more than four photos.');
+      }
+      const { error: updateError } = await this.client
+        .from('home_founders')
+        .update({
+          message: input.message.trim(),
+          founder_name: input.name.trim(),
+          photo_paths: photoPaths,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', 'home');
+      if (updateError) throw updateError;
+      saved = true;
+
+      const pathsToRemove = previousPaths.filter((path) => !photoPaths.includes(path));
+      if (pathsToRemove.length) {
+        const { error: cleanupError } = await this.client.storage
+          .from(MEDIA_BUCKET)
+          .remove(pathsToRemove);
+        if (cleanupError) {
+          console.error('Founder content was saved, but old founder photos could not be removed.', cleanupError);
+        }
+      }
+      return this.getHomeFounders();
+    } catch (error) {
+      if (uploadedPaths.length && !saved) {
+        const { error: cleanupError } = await this.client.storage
+          .from(MEDIA_BUCKET)
+          .remove(uploadedPaths);
+        if (cleanupError) {
+          console.error('Unable to remove uploaded founder photos after the save failed.', cleanupError);
+        }
+      }
+      throw error;
+    }
+  }
+
   async getHomeVideoUrl(): Promise<string | null> {
     const { data, error } = await this.client
       .from('site_content')
       .select('media_path')
       .eq('kind', 'video')
       .eq('published', true)
+      .eq('home_featured', true)
       .not('media_path', 'is', null)
       .order('created_at', { ascending: false })
       .limit(1)
@@ -167,8 +303,19 @@ export class SupabaseService {
     const { data: signedUrl, error: storageError } = await this.client.storage
       .from(MEDIA_BUCKET)
       .createSignedUrl(data.media_path, 86400);
-    if (storageError) throw storageError;
+    if (storageError) {
+      if (isMissingStorageObject(storageError)) return null;
+      throw storageError;
+    }
     return signedUrl.signedUrl;
+  }
+
+  async setHomeFeaturedVideo(contentId: string | null): Promise<string | null> {
+    const { error } = await this.client.rpc('set_home_featured_video', {
+      p_content_id: contentId,
+    });
+    if (error) throw error;
+    return this.getHomeVideoUrl();
   }
 
   async updateHomeBelief(belief: HomeBelief): Promise<HomeBelief> {
@@ -192,20 +339,98 @@ export class SupabaseService {
   async getPublishedContent(): Promise<SiteContent[]> {
     const { data, error } = await this.client
       .from('site_content')
-      .select('id, kind, title, description, quote, media_path, published, created_at')
+      .select('id, kind, title, description, quote, media_path, published, home_featured, created_at')
       .eq('published', true)
       .order('created_at', { ascending: false });
     if (error) throw error;
-    return this.addSignedMediaUrls(data as SiteContent[]);
+    const content = await this.addSignedMediaUrls(data as SiteContent[]);
+    return content.filter((item) => item.kind === 'quote' || item.media_url !== null);
   }
 
   async getAllContent(): Promise<SiteContent[]> {
     const { data, error } = await this.client
       .from('site_content')
-      .select('id, kind, title, description, quote, media_path, published, created_at')
+      .select('id, kind, title, description, quote, media_path, published, home_featured, created_at')
       .order('created_at', { ascending: false });
     if (error) throw error;
     return this.addSignedMediaUrls(data as SiteContent[]);
+  }
+
+  async getAvailableBucketVideos(): Promise<BucketVideo[]> {
+    const { data: linkedItems, error: linkedError } = await this.client
+      .from('site_content')
+      .select('media_path')
+      .not('media_path', 'is', null);
+    if (linkedError) throw linkedError;
+    const linkedPaths = new Set(
+      (linkedItems as Array<{ media_path: string | null }>)
+        .map((item) => item.media_path)
+        .filter((path): path is string => path !== null),
+    );
+
+    const videos: BucketVideo[] = [];
+    const pendingFolders = [''];
+    while (pendingFolders.length > 0) {
+      const folder = pendingFolders.pop();
+      if (folder === undefined) continue;
+      let offset = 0;
+      const limit = 1000;
+
+      while (true) {
+        const { data, error } = await this.client.storage
+          .from(MEDIA_BUCKET)
+          .list(folder, { limit, offset, sortBy: { column: 'name', order: 'asc' } });
+        if (error) throw error;
+
+        for (const entry of data) {
+          const path = folder ? `${folder}/${entry.name}` : entry.name;
+          if (entry.id === null) {
+            pendingFolders.push(path);
+          } else if (
+            /\.(mp4|webm)$/i.test(entry.name) &&
+            !linkedPaths.has(path)
+          ) {
+            videos.push({
+              path,
+              name: entry.name,
+              created_at: entry.created_at ?? null,
+              size:
+                typeof entry.metadata?.['size'] === 'number'
+                  ? entry.metadata['size']
+                  : null,
+            });
+          }
+        }
+
+        if (data.length < limit) break;
+        offset += limit;
+      }
+    }
+
+    return videos.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  async importBucketVideo(path: string, title: string): Promise<string> {
+    const normalizedPath = path.trim();
+    const normalizedTitle = title.trim();
+    if (!normalizedPath || !/\.(mp4|webm)$/i.test(normalizedPath)) {
+      throw new Error('Choose an MP4 or WebM video from the media bucket.');
+    }
+    if (!normalizedTitle) throw new Error('Enter a title for this video.');
+
+    const { data, error } = await this.client
+      .from('site_content')
+      .insert({
+        kind: 'video',
+        title: normalizedTitle,
+        description: 'Imported from the public-media bucket.',
+        media_path: normalizedPath,
+        published: true,
+      })
+      .select('id')
+      .single();
+    if (error) throw error;
+    return data.id as string;
   }
 
   private async addSignedMediaUrls(content: SiteContent[]): Promise<SiteContent[]> {
@@ -215,7 +440,10 @@ export class SupabaseService {
         const { data, error } = await this.client.storage
           .from(MEDIA_BUCKET)
           .createSignedUrl(item.media_path, 3600);
-        if (error) throw error;
+        if (error) {
+          if (isMissingStorageObject(error)) return { ...item, media_url: null };
+          throw error;
+        }
         return { ...item, media_url: data.signedUrl };
       }),
     );

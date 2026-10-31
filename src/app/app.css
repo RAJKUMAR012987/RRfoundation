@@ -25,8 +25,8 @@
   align-items: center;
   justify-content: flex-end;
   gap: clamp(1rem, 2vw, 2rem);
-  min-height: 96px;
-  padding: 24px clamp(1.5rem, 6vw, 6rem) 24px clamp(10rem, 15vw, 13rem);
+  min-height: 6rem;
+  padding: 12px clamp(1.5rem, 6vw, 6rem) 12px clamp(9rem, 13vw, 11rem);
   border-bottom: 1px solid rgba(36, 40, 32, 0.08);
   background: rgba(250, 250, 249, 0.92);
   backdrop-filter: blur(12px);
@@ -36,13 +36,13 @@
 
 .header-brand {
   position: absolute;
-  top: -0.5rem;
+  top: 0.15rem;
   left: clamp(1.25rem, 5vw, 5.5rem);
   z-index: 2;
   display: grid;
-  width: clamp(5.5rem, 8vw, 6.5rem);
-  min-height: 56px;
-  height: 6rem;
+  width: clamp(5rem, 7vw, 5.75rem);
+  min-height: 48px;
+  height: 4rem;
   place-items: center;
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -78,7 +78,7 @@
   position: relative;
   padding: 0.65rem 0;
   color: #4b4e49;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -136,9 +136,9 @@
   flex-shrink: 0;
   cursor: pointer;
   font-family: inherit;
-  min-height: 3.2rem;
-  padding: 14px 1.75rem;
-  font-size: 16px;
+  min-height: 2.7rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
   font-weight: 600;
   border: 2px solid var(--primary);
   background: transparent;
@@ -161,15 +161,16 @@
 
 .header-reg-number {
   position: absolute;
-  top: 5.5rem;
+  top: 4.1rem;
   left: clamp(1.25rem, 5vw, 5.5rem);
   z-index: 2;
-  width: clamp(5.5rem, 8vw, 6.5rem);
+  width: clamp(5rem, 7vw, 5.75rem);
   color: #4b4e49;
-  font-size: 0.78rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  line-height: 1.15;
 }
 
 .header-reg-number strong {
@@ -177,11 +178,12 @@
   font-family: ui-monospace, 'Cascadia Code', monospace;
   font-size: 1em;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .header-pan {
   color: #4b4e49;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -509,9 +511,44 @@ textarea:focus-visible {
 
 @media (max-width: 58rem) {
   .site-header {
+    min-height: 6.4rem;
     justify-content: flex-end;
     gap: 0.75rem;
-    padding-left: 9.5rem;
+    padding-left: 7rem;
+    padding-right: 1.25rem;
+  }
+
+  .header-brand {
+    top: 0.15rem;
+    left: 1rem;
+    width: 4.6rem;
+    height: 4.1rem;
+    padding: 0.35rem;
+  }
+
+  .header-reg-number {
+    top: 4.15rem;
+    left: 1rem;
+    width: 4.6rem;
+    font-size: 0.65rem;
+    white-space: normal;
+    line-height: 1.15;
+  }
+
+  .header-cta {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .header-pan {
+    font-size: 0.74rem;
+  }
+
+  .menu-toggle {
+    min-height: 2.5rem;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.76rem;
   }
 
   .footer-top {
@@ -546,26 +583,67 @@ textarea:focus-visible {
 
 @media (max-width: 38rem) {
   .site-header {
-    min-height: 6.2rem;
-    padding: 0.45rem 0.75rem 0.45rem 5.6rem;
+    min-height: 5.75rem;
+    padding: 0;
+    gap: 0;
   }
 
   .header-brand {
-    top: -0.8rem;
+    top: 0.3rem;
     left: 0.75rem;
-    width: 4.5rem;
-    height: 4.5rem;
-    padding: 0.25rem;
+    width: 3.35rem;
+    height: 2.9rem;
+    padding: 0.2rem;
+    border-radius: 0.45rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
   }
 
   .header-reg-number {
-    top: 3.8rem;
+    top: 3.25rem;
     left: 0.75rem;
-    width: 3.75rem;
-    font-size: 0.64rem;
+    width: 3.35rem;
+    font-size: 0.52rem;
     line-height: 1.15;
     white-space: normal;
     overflow-wrap: anywhere;
+  }
+
+  .header-donate-group {
+    display: contents;
+  }
+
+  .header-cta {
+    position: absolute;
+    top: 0.45rem;
+    right: 5.2rem;
+    min-height: 2.25rem;
+    padding: 0.4rem 0.65rem;
+    border-width: 1.5px;
+    border-radius: 0.45rem;
+    font-size: 0.7rem;
+  }
+
+  .header-pan {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.35rem;
+    width: calc(100% - 5.2rem);
+    font-size: 0.58rem;
+    line-height: 1.1;
+    text-align: right;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    min-height: 2.25rem;
+    gap: 0.35rem;
+    padding: 0.35rem 0.5rem;
+    border-color: #dce3dd;
+    background: #fff;
+    font-size: 0.68rem;
+    box-shadow: 0 1px 4px rgba(20, 40, 28, 0.06);
   }
 
   .site-header nav {
@@ -577,16 +655,18 @@ textarea:focus-visible {
     align-items: stretch;
     justify-content: stretch;
     gap: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-top: 1px solid var(--line);
   }
 
-  .header-cta {
-    min-height: 2.3rem;
-    padding: 0.45rem 0.7rem;
-    font-size: 0.72rem;
+  .site-header nav.is-open {
+    padding-block: 0.35rem 0.75rem;
   }
 
-  .header-pan {
-    font-size: 0.76rem;
+  .site-header nav a {
+    padding: 0.75rem 0.25rem;
+    font-size: 0.95rem;
   }
 
   .footer-logo {

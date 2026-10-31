@@ -133,6 +133,75 @@
         </form>
       </section>
 
+      <section class="admin-panel" aria-labelledby="home-founders-title">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">Home page</p>
+            <h2 id="home-founders-title">Founder message and photos</h2>
+          </div>
+          <span class="admin-count">{{ homeFounders.photos.length }} / 4 photos</span>
+        </div>
+        <p class="admin-panel__note">
+          This section appears above Our belief. Add photos to the current gallery, up to four total.
+          Select “Remove current photos” to replace them or clear the gallery.
+        </p>
+        @if (homeFounders.photos.length) {
+          <div class="admin-founder-previews" aria-label="Current Home founder photos">
+            @for (photo of homeFounders.photos; track photo.path) {
+              <img [src]="photo.url" alt="Current founder photo" />
+            }
+          </div>
+        }
+        <form class="admin-form-grid admin-founder-form" (ngSubmit)="saveHomeFounders()">
+          <label>
+            Founder name
+            <input name="founderName" [(ngModel)]="homeFounders.name" maxlength="120" required />
+          </label>
+          <label>
+            Founder message
+            <textarea name="founderMessage" [(ngModel)]="homeFounders.message" rows="4" maxlength="1200" required></textarea>
+          </label>
+          <label>
+            Add founder photos
+            <span>(choose up to {{ removeFounderPhotos() ? 4 : 4 - homeFounders.photos.length }} more)</span>
+            <input
+              type="file"
+              name="founderPhotos"
+              accept="image/jpeg,image/png,image/webp"
+              multiple
+              (change)="chooseFounderPhotos($event)"
+            />
+            <span class="admin-field-hint">
+              JPEG, PNG, or WebP · Up to 10 MB each. Photos are optimized to max 1600 × 1200 px
+              without cropping.
+            </span>
+          </label>
+          @if (founderFiles().length) {
+            <p class="admin-file-name" aria-live="polite">
+              {{ preparingFounderPhotos() ? 'Preparing photos…' : founderFiles().length + ' optimized photo(s) ready to upload.' }}
+            </p>
+          }
+          @if (homeFounders.photos.length) {
+            <label class="admin-checkbox">
+              <input
+                type="checkbox"
+                name="removeFounderPhotos"
+                [checked]="removeFounderPhotos()"
+                (change)="toggleRemoveFounderPhotos($event)"
+              />
+              Remove current photos{{ founderFiles().length ? ' and replace with selected photos' : '' }}
+            </label>
+          }
+          <button
+            class="admin-button admin-button--primary"
+            type="submit"
+            [disabled]="savingFounders() || preparingFounderPhotos()"
+          >
+            {{ savingFounders() ? 'Saving…' : preparingFounderPhotos() ? 'Preparing photos…' : 'Save founder section' }}
+          </button>
+        </form>
+      </section>
+
       <section class="admin-panel" aria-labelledby="content-create-title">
         <div class="admin-panel__heading">
           <div>
@@ -142,8 +211,9 @@
           <span class="admin-draft-label">New items start as drafts</span>
         </div>
         <p class="admin-panel__note">
-          To show a video on the Home page, add it here and publish it below. The newest published video
-          plays muted on repeat as the Home hero background. Unpublish it to return to the default image.
+          Published photos and videos remain in Projects. To use a video in the Home hero, publish it
+          below, then choose <strong>Feature on Home</strong>. It plays muted on repeat; remove the
+          featured selection to show the default image again.
         </p>
 
         <form class="admin-content-form" (ngSubmit)="saveContent()">
@@ -229,6 +299,48 @@
           <span class="admin-count">{{ content().length }} items</span>
         </div>
 
+        <div class="admin-bucket-library" aria-labelledby="bucket-videos-title">
+          <div class="admin-bucket-library__heading">
+            <div>
+              <h3 id="bucket-videos-title">Videos in public-media</h3>
+              <p>Import an existing bucket video into Projects, then use Feature on Home if desired.</p>
+            </div>
+            <span class="admin-count">{{ availableBucketVideos().length }} available</span>
+          </div>
+          @if (availableBucketVideos().length === 0) {
+            <p class="admin-empty">No unlinked MP4 or WebM videos found in the public-media bucket.</p>
+          } @else {
+            <div class="admin-bucket-library__list">
+              @for (video of availableBucketVideos(); track video.path) {
+                <article class="admin-bucket-video">
+                  <div class="admin-bucket-video__details">
+                    <strong>{{ video.name }}</strong>
+                    <span>{{ video.path }}@if (video.size !== null) { · {{ (video.size / 1048576) | number:'1.1-1' }} MB }</span>
+                  </div>
+                  <div class="admin-bucket-video__actions">
+                    <button
+                      class="admin-button admin-button--quiet"
+                      type="button"
+                      [disabled]="importingBucketVideo() !== ''"
+                      (click)="importBucketVideo(video)"
+                    >
+                      {{ importingBucketVideo() === video.path ? 'Adding…' : 'Add to Projects' }}
+                    </button>
+                    <button
+                      class="admin-button admin-button--primary"
+                      type="button"
+                      [disabled]="importingBucketVideo() !== ''"
+                      (click)="importBucketVideo(video, true)"
+                    >
+                      {{ importingBucketVideo() === video.path ? 'Adding…' : 'Feature on Home' }}
+                    </button>
+                  </div>
+                </article>
+              }
+            </div>
+          }
+        </div>
+
         @if (content().length === 0) {
           <p class="admin-empty">No content yet. New additions will appear here as drafts.</p>
         } @else {
@@ -252,11 +364,30 @@
                   } @else if (item.description) {
                     <p>{{ item.description }}</p>
                   }
+                  @if (item.kind === 'video' && !item.media_url) {
+                    <p class="admin-media-warning">
+                      Video file not found at <code>{{ item.media_path }}</code>. Import the correct
+                      file from the public-media library and feature that video instead.
+                    </p>
+                  }
                   <span class="admin-content-item__status" [class.is-published]="item.published">
                     {{ item.published ? 'Published' : 'Draft' }}
                   </span>
+                  @if (item.kind === 'video' && item.home_featured) {
+                    <span class="admin-content-item__status is-home-featured">Home hero video</span>
+                  }
                 </div>
                 <div class="admin-content-item__actions">
+                  @if (item.kind === 'video' && item.published) {
+                    <button
+                      class="admin-button admin-button--quiet"
+                      type="button"
+                      [disabled]="savingFeaturedVideo()"
+                      (click)="setHomeFeaturedVideo(item.home_featured ? null : item)"
+                    >
+                      {{ item.home_featured ? 'Remove from Home' : 'Feature on Home' }}
+                    </button>
+                  }
                   <button class="admin-button admin-button--quiet" type="button" (click)="togglePublished(item)">
                     {{ item.published ? 'Unpublish' : 'Publish' }}
                   </button>
