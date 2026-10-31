@@ -6,3 +6,8 @@
 .env.keys
 .env.local
 .env.*.local
+
+# Environment secrets
+.env
+.env.*
+!.env.example
