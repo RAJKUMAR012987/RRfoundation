@@ -7,6 +7,7 @@ import {
   OnInit,
   PLATFORM_ID,
   signal,
+  WritableSignal,
 } from '@angular/core';
 import { isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -30,7 +31,7 @@ export class Home implements OnInit, OnDestroy {
   private readonly supabase = inject(SupabaseService);
 
   readonly belief = signal<HomeBelief>(DEFAULT_HOME_BELIEF);
-  readonly founders = signal<HomeFounders>(DEFAULT_HOME_FOUNDERS);
+  readonly founders: WritableSignal<HomeFounders> = signal(DEFAULT_HOME_FOUNDERS);
   readonly homeVideoUrl = signal<string | null>(null);
   private loadingBelief = false;
   private loadingFounders = false;
