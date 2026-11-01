@@ -156,6 +156,10 @@
                 <video [src]="item.media_url" controls preload="metadata" [attr.aria-label]="item.title"></video>
               } @else if (item.kind === 'quote') {
                 <blockquote>{{ item.quote }}</blockquote>
+              } @else {
+                <p class="community-card__media-unavailable" role="note">
+                  Media for this update is currently unavailable.
+                </p>
               }
               <div class="community-card__body">
                 <span class="projects-eyebrow">{{ item.kind }}</span>

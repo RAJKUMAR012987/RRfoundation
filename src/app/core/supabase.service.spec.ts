@@ -1,4 +1,33 @@
-import { normalizeDonationPayment } from './supabase.service';
+import { isMissingStorageObject, normalizeDonationPayment } from './supabase.service';
+
+describe('isMissingStorageObject', () => {
+  it('recognizes missing objects returned as 404', () => {
+    expect(
+      isMissingStorageObject({
+        statusCode: '404',
+        message: 'Object not found',
+      }),
+    ).toBe(true);
+  });
+
+  it('recognizes missing objects returned as 400', () => {
+    expect(
+      isMissingStorageObject({
+        statusCode: 400,
+        message: 'Object not found',
+      }),
+    ).toBe(true);
+  });
+
+  it('does not treat unrelated storage errors as missing objects', () => {
+    expect(
+      isMissingStorageObject({
+        statusCode: '400',
+        message: 'Invalid request',
+      }),
+    ).toBe(false);
+  });
+});
 
 describe('normalizeDonationPayment', () => {
   const basePayment = {

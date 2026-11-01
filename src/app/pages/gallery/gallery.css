@@ -304,6 +304,18 @@
   line-height: 1.55;
 }
 
+.community-card__media-unavailable {
+  display: grid;
+  min-height: 13rem;
+  place-items: center;
+  margin: 0;
+  padding: 1rem;
+  background: #e8eee9;
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-align: center;
+}
+
 .community-card__body {
   padding: 1.1rem 1.2rem 1.3rem;
 }

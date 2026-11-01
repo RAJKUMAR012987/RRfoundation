@@ -83,12 +83,13 @@ export function normalizeDonationPayment(payment: DonationPayment): DonationPaym
   };
 }
 
-function isMissingStorageObject(error: unknown): boolean {
+export function isMissingStorageObject(error: unknown): boolean {
   if (typeof error !== 'object' || error === null) return false;
   const details = error as Record<string, unknown>;
+  const statusCode = String(details['statusCode']);
   return (
     details['code'] === 'NoSuchKey' ||
-    (details['statusCode'] === '404' &&
+    ((statusCode === '400' || statusCode === '404') &&
       typeof details['message'] === 'string' &&
       details['message'].toLowerCase().includes('object not found'))
   );
@@ -300,14 +301,7 @@ export class SupabaseService {
     if (error) throw error;
     if (!data?.media_path) return null;
 
-    const { data: signedUrl, error: storageError } = await this.client.storage
-      .from(MEDIA_BUCKET)
-      .createSignedUrl(data.media_path, 86400);
-    if (storageError) {
-      if (isMissingStorageObject(storageError)) return null;
-      throw storageError;
-    }
-    return signedUrl.signedUrl;
+    return this.getPublicMediaUrl(data.media_path);
   }
 
   async setHomeFeaturedVideo(contentId: string | null): Promise<string | null> {
@@ -343,8 +337,7 @@ export class SupabaseService {
       .eq('published', true)
       .order('created_at', { ascending: false });
     if (error) throw error;
-    const content = await this.addSignedMediaUrls(data as SiteContent[]);
-    return content.filter((item) => item.kind === 'quote' || item.media_url !== null);
+    return this.addSignedMediaUrls(data as SiteContent[]);
   }
 
   async getAllContent(): Promise<SiteContent[]> {
@@ -437,6 +430,9 @@ export class SupabaseService {
     return Promise.all(
       content.map(async (item) => {
         if (!item.media_path) return { ...item, media_url: null };
+        if (item.published) {
+          return { ...item, media_url: this.getPublicMediaUrl(item.media_path) };
+        }
         const { data, error } = await this.client.storage
           .from(MEDIA_BUCKET)
           .createSignedUrl(item.media_path, 3600);
@@ -447,6 +443,10 @@ export class SupabaseService {
         return { ...item, media_url: data.signedUrl };
       }),
     );
+  }
+
+  private getPublicMediaUrl(path: string): string {
+    return this.client.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl;
   }
 
   async addContent(input: {

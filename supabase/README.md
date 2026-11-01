@@ -122,3 +122,5 @@ visitor or admin is permitted to read.
 Videos uploaded directly to Storage do not appear in Projects until an administrator imports them
 from **Videos in public-media** on the Admin dashboard. Choose **Add to Projects** to publish it in
 Projects, or **Feature on Home** to publish it and immediately use it as the Home hero video.
+If a published update says its media is unavailable, its database entry points to an object that
+Storage cannot find. Re-upload the file through `/admin` and publish it, then remove the stale entry.
