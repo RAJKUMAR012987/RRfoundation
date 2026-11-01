@@ -23,6 +23,23 @@ describe('Donate', () => {
     expect(component).toBeTruthy();
   });
 
+  it('validates optional donor email and phone details', () => {
+    component.donorEmail = 'invalid-email';
+    expect(component.isDonorDetailsValid).toBe(false);
+
+    component.donorEmail = 'donor@example.com';
+    component.donorPhone = '987654321';
+    expect(component.isDonorDetailsValid).toBe(false);
+
+    component.donorPhone = '9876543210';
+    expect(component.isDonorDetailsValid).toBe(true);
+  });
+
+  it('keeps only the first ten digits in the phone field', () => {
+    component.updateDonorPhone('+91 98765a43210');
+    expect(component.donorPhone).toBe('9876543210');
+  });
+
   it('should show online donations as coming soon without collecting payment details', () => {
     const page = fixture.nativeElement as HTMLElement;
 

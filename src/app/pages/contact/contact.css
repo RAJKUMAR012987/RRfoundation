@@ -258,6 +258,21 @@ a.cc-info-value:hover { color: #ffcf36; }
   flex-shrink: 0;
 }
 
+.cc-phone-prefix {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.cc-field-error {
+  color: #8d291f;
+  font-size: 0.78rem;
+}
+
 .cc-input {
   width: 100%;
   padding: 0.85rem 1rem 0.85rem 2.6rem;

@@ -22,4 +22,23 @@ describe('Contact', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('requires a valid email and validates an optional Indian phone number', () => {
+    component.name = 'Ravi Kumar';
+    component.email = 'not-an-email';
+    component.message = 'Hello';
+    expect(component.isContactFormValid).toBe(false);
+
+    component.email = 'ravi@example.com';
+    component.phone = '987654321';
+    expect(component.isContactFormValid).toBe(false);
+
+    component.phone = '9876543210';
+    expect(component.isContactFormValid).toBe(true);
+  });
+
+  it('keeps only the first ten digits in the phone field', () => {
+    component.updatePhone('+91 98765a43210');
+    expect(component.phone).toBe('9876543210');
+  });
 });

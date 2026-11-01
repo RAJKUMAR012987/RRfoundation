@@ -628,6 +628,16 @@
   pointer-events: none;
 }
 
+.dh-phone-input {
+  padding-left: 3.25rem;
+}
+
+.dh-field-error {
+  margin-top: 0.35rem;
+  color: #8d291f;
+  font-size: 0.78rem;
+}
+
 .dh-input--amount {
   padding-left: 2rem;
   font-size: 1.15rem;

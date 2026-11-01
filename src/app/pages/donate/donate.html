@@ -273,15 +273,26 @@
 
               <div class="dh-field">
                 <label class="dh-label" for="donor-phone">Phone</label>
-                <input
-                  id="donor-phone"
-                  class="dh-input"
-                  type="tel"
-                  name="donorPhone"
-                  placeholder="+91 98765 43210"
-                  [(ngModel)]="donorPhone"
-                  autocomplete="tel"
-                />
+                <div class="dh-input-icon-wrap">
+                  <span class="dh-input-prefix" aria-hidden="true">+91</span>
+                  <input
+                    id="donor-phone"
+                    class="dh-input dh-phone-input"
+                    type="tel"
+                    name="donorPhone"
+                    placeholder="98765 43210"
+                    [(ngModel)]="donorPhone"
+                    (ngModelChange)="updateDonorPhone($event)"
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    maxlength="10"
+                    pattern="[0-9]{10}"
+                    [attr.aria-invalid]="donorPhone && !isValidIndianPhoneNumber(donorPhone)"
+                  />
+                </div>
+                @if (donorPhone && !isValidIndianPhoneNumber(donorPhone)) {
+                  <small class="dh-field-error">Enter exactly 10 digits after +91.</small>
+                }
               </div>
 
               <div class="dh-field dh-field--full">
@@ -294,7 +305,11 @@
                   placeholder="ravi@example.com"
                   [(ngModel)]="donorEmail"
                   autocomplete="email"
+                  [attr.aria-invalid]="donorEmail && !isValidEmailAddress(donorEmail)"
                 />
+                @if (donorEmail && !isValidEmailAddress(donorEmail)) {
+                  <small class="dh-field-error">Enter a valid email address.</small>
+                }
               </div>
 
             </div>
@@ -318,7 +333,7 @@
           <button
             class="dh-submit-btn"
             type="submit"
-            [disabled]="!isAmountValid || paymentState() === 'processing'"
+            [disabled]="!isAmountValid || (!isAnonymous && !isDonorDetailsValid) || paymentState() === 'processing'"
             [attr.aria-busy]="paymentState() === 'processing'"
           >
             @if (paymentState() === 'processing') {

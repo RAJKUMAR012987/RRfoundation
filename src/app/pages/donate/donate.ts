@@ -10,6 +10,11 @@ import { NgOptimizedImage, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../../environments/environment';
+import {
+  isValidEmailAddress,
+  isValidIndianPhoneNumber,
+  normalizeIndianPhoneDigits,
+} from '../../core/form-validation';
 
 interface RazorpayOptions {
   key: string;
@@ -130,6 +135,25 @@ export class Donate implements OnInit {
     return this.effectiveAmount >= 10;
   }
 
+  get isDonorDetailsValid(): boolean {
+    return (
+      (!this.donorPhone || isValidIndianPhoneNumber(this.donorPhone)) &&
+      (!this.donorEmail || isValidEmailAddress(this.donorEmail))
+    );
+  }
+
+  isValidEmailAddress(email: string): boolean {
+    return isValidEmailAddress(email);
+  }
+
+  isValidIndianPhoneNumber(phone: string): boolean {
+    return isValidIndianPhoneNumber(phone);
+  }
+
+  updateDonorPhone(value: string): void {
+    this.donorPhone = normalizeIndianPhoneDigits(value);
+  }
+
   selectCategory(cat: DonationCategory): void {
     this.selectedCategory.set(cat);
   }
@@ -144,7 +168,17 @@ export class Donate implements OnInit {
   }
 
   async pay(): Promise<void> {
-    if (!this.isAmountValid) return;
+    if (!this.isAmountValid || (!this.isAnonymous && !this.isDonorDetailsValid)) {
+      if (!this.isAnonymous && !this.isDonorDetailsValid) {
+        this.paymentState.set('error');
+        this.paymentError.set(
+          this.donorPhone && !isValidIndianPhoneNumber(this.donorPhone)
+            ? 'Enter exactly 10 phone digits after +91.'
+            : 'Enter a valid email address.',
+        );
+      }
+      return;
+    }
     this.paymentState.set('processing');
     this.paymentError.set('');
     try {
@@ -210,7 +244,11 @@ export class Donate implements OnInit {
         prefill: {
           name: this.isAnonymous ? undefined : this.donorName || undefined,
           email: this.isAnonymous ? undefined : this.donorEmail || undefined,
-          contact: this.isAnonymous ? undefined : this.donorPhone || undefined,
+          contact: this.isAnonymous
+            ? undefined
+            : this.donorPhone
+              ? `+91${this.donorPhone}`
+              : undefined,
         },
         notes: { category: cat.id },
         theme: { color: cat.color },
